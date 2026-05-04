@@ -17,7 +17,6 @@ interface FinancialReportsProps {
 export default function FinancialReports({ companyName, financialData }: FinancialReportsProps) {
   const [activeTab, setActiveTab] = useState<'income' | 'cashflow' | 'capex' | 'scenarios'>('income');
 
-  // Données pour les graphiques
   const revenueData = [
     { year: 'N+1', revenue: 100, expenses: 150, profit: -50 },
     { year: 'N+2', revenue: 250, expenses: 200, profit: 50 },
@@ -63,42 +62,28 @@ export default function FinancialReports({ companyName, financialData }: Financi
     { name: 'Optimiste', value: 13, color: '#10B981' },
   ];
 
-  const kpiData = [
-    { name: 'MRR', value: '19M', growth: '+15%', target: '100M' },
-    { name: 'Churn', value: '3%', growth: '-2%', target: '<5%' },
-    { name: 'LTV/CAC', value: '6.5x', growth: '+1.2x', target: '>5x' },
-    { name: 'NPS', value: '52', growth: '+12', target: '>50' },
-  ];
-
-  const handlePrint = () => {
-    window.print();
+  const formatPercent = (value: number | undefined): string => {
+    if (value === undefined) return '0%';
+    return `${(value * 100).toFixed(0)}%`;
   };
 
-  const handleDownloadPDF = () => {
-    window.print();
+  const CustomLabel = ({ name, percent }: { name?: string; percent?: number }) => {
+    if (!percent) return null;
+    return `${name} ${(percent * 100).toFixed(0)}%`;
   };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Barre d'outils */}
       <div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
-        <button
-          onClick={handleDownloadPDF}
-          className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary/90 transition-all flex items-center gap-2"
-        >
+        <button className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
           <Download size={18} /> Télécharger rapports
         </button>
-        <button
-          onClick={handlePrint}
-          className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-600 transition-all flex items-center gap-2"
-        >
+        <button className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
           <Printer size={18} /> Imprimer
         </button>
       </div>
 
       <div className="container mx-auto max-w-6xl py-8 px-4 print:py-0">
-        
-        {/* En-tête */}
         <div className="bg-gradient-to-r from-primary to-primary/70 text-white p-8 rounded-t-xl print:bg-primary mb-6">
           <h1 className="text-3xl font-bold mb-2">{companyName}</h1>
           <p className="text-xl opacity-90">Rapports Financiers & Projections</p>
@@ -108,41 +93,25 @@ export default function FinancialReports({ companyName, financialData }: Financi
           </div>
         </div>
 
-        {/* Navigation des onglets */}
         <div className="flex flex-wrap gap-2 mb-6 print:hidden">
-          {[
-            { id: 'income', label: '📊 Compte de résultat', icon: TrendingUp },
-            { id: 'cashflow', label: '💵 Plan de trésorerie', icon: DollarSign },
-            { id: 'capex', label: '🏗️ CAPEX/OPEX', icon: PieChartIcon },
-            { id: 'scenarios', label: '🎯 Scénarios', icon: TrendingDown },
-          ].map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 ${
-                activeTab === tab.id
-                  ? 'bg-primary text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100'
-              }`}
-            >
-              <tab.icon size={18} />
-              {tab.label}
-            </button>
-          ))}
+          <button onClick={() => setActiveTab('income')} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'income' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}>
+            <TrendingUp size={18} /> Compte de résultat
+          </button>
+          <button onClick={() => setActiveTab('cashflow')} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'cashflow' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}>
+            <DollarSign size={18} /> Plan de trésorerie
+          </button>
+          <button onClick={() => setActiveTab('capex')} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'capex' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}>
+            <PieChartIcon size={18} /> CAPEX/OPEX
+          </button>
+          <button onClick={() => setActiveTab('scenarios')} className={`px-4 py-2 rounded-lg flex items-center gap-2 ${activeTab === 'scenarios' ? 'bg-primary text-white' : 'bg-white text-gray-700'}`}>
+            <TrendingDown size={18} /> Scénarios
+          </button>
         </div>
 
-        {/* Contenu des onglets */}
         <div className="space-y-6">
-          
-          {/* 1. COMPTE DE RÉSULTAT */}
           {activeTab === 'income' && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <TrendingUp className="text-primary" />
-                Compte de résultat prévisionnel 5 ans
-              </h2>
-              
-              {/* Graphique en barres */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Compte de résultat prévisionnel 5 ans</h2>
               <div className="mb-8 h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={revenueData}>
@@ -151,152 +120,21 @@ export default function FinancialReports({ companyName, financialData }: Financi
                     <YAxis />
                     <Tooltip formatter={(value) => `${value}M FCFA`} />
                     <Legend />
-                    <Bar dataKey="revenue" name="Chiffre d'affaires" fill="#0A66C2" />
+                    <Bar dataKey="revenue" name="CA" fill="#0A66C2" />
                     <Bar dataKey="expenses" name="Charges" fill="#F59E0B" />
                     <Bar dataKey="profit" name="Résultat" fill="#10B981" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-
-              {/* Tableau détaillé */}
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-gray-100 dark:bg-gray-700">
-                      <th className="p-3 text-left">Indicateurs (M FCFA)</th>
-                      <th className="p-3 text-right">N+1</th>
-                      <th className="p-3 text-right">N+2</th>
-                      <th className="p-3 text-right">N+3</th>
-                      <th className="p-3 text-right">N+4</th>
-                      <th className="p-3 text-right">N+5</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 font-medium">Chiffre d'affaires</td>
-                      <td className="p-3 text-right">100M</td>
-                      <td className="p-3 text-right">250M</td>
-                      <td className="p-3 text-right">500M</td>
-                      <td className="p-3 text-right">800M</td>
-                      <td className="p-3 text-right">1200M</td>
-                    </tr>
-                    <tr className="border-b border-gray-200 bg-gray-50 dark:bg-gray-800/50">
-                      <td className="p-3 font-medium">Charges d'exploitation</td>
-                      <td className="p-3 text-right">150M</td>
-                      <td className="p-3 text-right">200M</td>
-                      <td className="p-3 text-right">350M</td>
-                      <td className="p-3 text-right">500M</td>
-                      <td className="p-3 text-right">720M</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                      <td className="p-3 font-medium">EBITDA</td>
-                      <td className="p-3 text-right text-red-600">-50M</td>
-                      <td className="p-3 text-right text-green-600">+50M</td>
-                      <td className="p-3 text-right text-green-600">+150M</td>
-                      <td className="p-3 text-right text-green-600">+300M</td>
-                      <td className="p-3 text-right text-green-600">+480M</td>
-                    </tr>
-                    <tr className="border-b border-gray-200 bg-gray-50 dark:bg-gray-800/50">
-                      <td className="p-3 font-medium">Marge EBITDA</td>
-                      <td className="p-3 text-right">-50%</td>
-                      <td className="p-3 text-right">20%</td>
-                      <td className="p-3 text-right">30%</td>
-                      <td className="p-3 text-right">38%</td>
-                      <td className="p-3 text-right">40%</td>
-                    </tr>
-                    <tr>
-                      <td className="p-3 font-medium">Résultat net</td>
-                      <td className="p-3 text-right text-red-600">-65M</td>
-                      <td className="p-3 text-right text-green-600">+35M</td>
-                      <td className="p-3 text-right text-green-600">+105M</td>
-                      <td className="p-3 text-right text-green-600">+210M</td>
-                      <td className="p-3 text-right text-green-600">+336M</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
           )}
 
-          {/* 2. PLAN DE TRÉSORERIE */}
-          {activeTab === 'cashflow' && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <DollarSign className="text-primary" />
-                Plan de trésorerie - 12 mois
-              </h2>
-
-              {/* Graphique en aires */}
-              <div className="mb-8 h-80">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={cashflowData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
-                    <YAxis />
-                    <Tooltip formatter={(value) => `${value}M FCFA`} />
-                    <Legend />
-                    <Area type="monotone" dataKey="encaissements" name="Encaissements" stroke="#0A66C2" fill="#0A66C2" fillOpacity={0.3} />
-                    <Area type="monotone" dataKey="decaissements" name="Décaissements" stroke="#EF4444" fill="#EF4444" fillOpacity={0.3} />
-                    <Line type="monotone" dataKey="solde" name="Solde" stroke="#10B981" strokeWidth={2} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-
-              {/* Tableau de trésorerie */}
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm border-collapse">
-                  <thead>
-                    <tr className="bg-gray-100 dark:bg-gray-700">
-                      <th className="p-2 text-left">Mois</th>
-                      <th className="p-2 text-right">Encaissements</th>
-                      <th className="p-2 text-right">Décaissements</th>
-                      <th className="p-2 text-right">Solde mensuel</th>
-                      <th className="p-2 text-right">Trésorerie cumulée</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cashflowData.map((row, i) => {
-                      const cumul = cashflowData.slice(0, i + 1).reduce((sum, r) => sum + r.solde, 0);
-                      return (
-                        <tr key={i} className="border-b border-gray-200">
-                          <td className="p-2 font-medium">{row.month}</td>
-                          <td className="p-2 text-right">{row.encaissements}M</td>
-                          <td className="p-2 text-right">{row.decaissements}M</td>
-                          <td className={`p-2 text-right ${row.solde >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                            {row.solde >= 0 ? '+' : ''}{row.solde}M
-                          </td>
-                          <td className={`p-2 text-right font-semibold ${cumul >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                            {cumul >= 0 ? '+' : ''}{cumul}M
-                           </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                  <tfoot className="bg-gray-100 dark:bg-gray-700">
-                    <tr>
-                      <td className="p-2 font-bold">Total / Solde final</td>
-                      <td className="p-2 text-right font-bold">{cashflowData.reduce((sum, r) => sum + r.encaissements, 0)}M</td>
-                      <td className="p-2 text-right font-bold">{cashflowData.reduce((sum, r) => sum + r.decaissements, 0)}M</td>
-                      <td className="p-2 text-right font-bold">{cashflowData.reduce((sum, r) => sum + r.solde, 0)}M</td>
-                      <td className="p-2 text-right font-bold text-green-600">{cashflowData.reduce((sum, r) => sum + r.solde, 0)}M</td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-          )}
-
-          {/* 3. CAPEX/OPEX DÉTAILLÉS */}
           {activeTab === 'capex' && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">🏗️ CAPEX/OPEX détaillés</h2>
-              
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">CAPEX/OPEX détaillés</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* CAPEX - Camembert */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 text-center">
-                    Investissements (CAPEX) - 100M FCFA
-                  </h3>
+                  <h3 className="text-lg font-semibold text-center mb-3">Investissements (CAPEX) - 100M FCFA</h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -305,7 +143,7 @@ export default function FinancialReports({ companyName, financialData }: Financi
                           cx="50%"
                           cy="50%"
                           labelLine={false}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }) => `${name} ${percent ? (percent * 100).toFixed(0) : 0}%`}
                           outerRadius={80}
                           fill="#8884d8"
                           dataKey="amount"
@@ -318,24 +156,9 @@ export default function FinancialReports({ companyName, financialData }: Financi
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
-                  <div className="mt-4 space-y-1">
-                    {capexData.map((item, i) => (
-                      <div key={i} className="flex justify-between items-center text-sm">
-                        <span className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
-                          {item.category}
-                        </span>
-                        <span className="font-semibold">{item.amount}M FCFA</span>
-                      </div>
-                    ))}
-                  </div>
                 </div>
-
-                {/* OPEX - Camembert */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 text-center">
-                    Charges d'exploitation (OPEX) - 80M FCFA/an
-                  </h3>
+                  <h3 className="text-lg font-semibold text-center mb-3">Charges d'exploitation (OPEX) - 80M FCFA/an</h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -344,7 +167,7 @@ export default function FinancialReports({ companyName, financialData }: Financi
                           cx="50%"
                           cy="50%"
                           labelLine={false}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }) => `${name} ${percent ? (percent * 100).toFixed(0) : 0}%`}
                           outerRadius={80}
                           fill="#8884d8"
                           dataKey="amount"
@@ -357,219 +180,49 @@ export default function FinancialReports({ companyName, financialData }: Financi
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
-                  <div className="mt-4 space-y-1">
-                    {opexData.map((item, i) => (
-                      <div key={i} className="flex justify-between items-center text-sm">
-                        <span className="flex items-center gap-2">
-                          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
-                          {item.category}
-                        </span>
-                        <span className="font-semibold">{item.amount}M FCFA</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Tableau récapitulatif */}
-              <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm text-gray-500">CAPEX total (investissements initiaux)</p>
-                    <p className="text-2xl font-bold text-primary">100M FCFA</p>
-                    <p className="text-xs text-gray-400">Développement, marketing, infrastructure</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">OPEX annuel (fonctionnement)</p>
-                    <p className="text-2xl font-bold text-primary">80M FCFA/an</p>
-                    <p className="text-xs text-gray-400">Salaires, hébergement, licences, support</p>
-                  </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* 4. SCÉNARIOS FINANCIERS */}
           {activeTab === 'scenarios' && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">🎯 3 scénarios financiers</h2>
-              
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">3 scénarios financiers</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Graphique des scénarios */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 text-center">
-                    Scénarios de rentabilité à 5 ans
-                  </h3>
-                  <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={[
-                        { year: 'N+1', pessimistic: -80, realistic: -50, optimistic: -30 },
-                        { year: 'N+2', pessimistic: -20, realistic: 50, optimistic: 80 },
-                        { year: 'N+3', pessimistic: 50, realistic: 150, optimistic: 220 },
-                        { year: 'N+4', pessimistic: 150, realistic: 300, optimistic: 450 },
-                        { year: 'N+5', pessimistic: 250, realistic: 480, optimistic: 700 },
-                      ]}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip formatter={(value) => `${value}M FCFA`} />
-                        <Legend />
-                        <Bar dataKey="pessimistic" name="Pessimiste" fill="#EF4444" />
-                        <Bar dataKey="realistic" name="Réaliste" fill="#F59E0B" />
-                        <Bar dataKey="optimistic" name="Optimiste" fill="#10B981" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={scenariosData}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={true}
+                        label={({ name, percent }) => `${name} ${percent ? (percent * 100).toFixed(0) : 0}%`}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                      >
+                        {scenariosData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip formatter={(value) => `${value}M FCFA`} />
+                    </PieChart>
+                  </ResponsiveContainer>
                 </div>
-
-                {/* Camembert des scénarios */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 text-center">
-                    CAPEX selon scénarios
-                  </h3>
-                  <div className="h-64">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={scenariosData}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={true}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                        >
-                          {scenariosData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.color} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(value) => `${value}M FCFA`} />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    {scenariosData.map((item, i) => (
-                      <div key={i} className="flex justify-between items-center p-2 rounded-lg" style={{ backgroundColor: `${item.color}20` }}>
-                        <span className="font-semibold">{item.name}</span>
-                        <span className="font-bold" style={{ color: item.color }}>{item.value}M FCFA</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* KPIs de suivi */}
-              <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">📊 Indicateurs clés de suivi</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {kpiData.map((kpi, i) => (
-                    <div key={i} className="text-center p-3 bg-white dark:bg-gray-600 rounded-lg">
-                      <p className="text-sm text-gray-500">{kpi.name}</p>
-                      <p className="text-xl font-bold text-primary">{kpi.value}</p>
-                      <p className={`text-xs ${kpi.growth.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                        {kpi.growth} vs objectif
-                      </p>
-                      <p className="text-xs text-gray-400">Cible: {kpi.target}</p>
+                <div className="space-y-2">
+                  {scenariosData.map((item, i) => (
+                    <div key={i} className="flex justify-between items-center p-2 rounded-lg" style={{ backgroundColor: `${item.color}20` }}>
+                      <span className="font-semibold">{item.name}</span>
+                      <span className="font-bold" style={{ color: item.color }}>{item.value}M FCFA</span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* Analyse de sensibilité */}
-              <div className="mt-4 p-4 bg-primary/5 rounded-lg">
-                <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">📈 Analyse de sensibilité</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
-                  <div className="p-2 border-l-4 border-red-500">
-                    <p className="font-medium">Hypothèse défavorable</p>
-                    <p className="text-gray-600">CA -20%, délais paiement +60j</p>
-                    <p className="text-red-600 font-semibold mt-1">Résultat: -40M FCFA</p>
-                  </div>
-                  <div className="p-2 border-l-4 border-yellow-500">
-                    <p className="font-medium">Hypothèse base</p>
-                    <p className="text-gray-600">Croissance 25%, CAC standard</p>
-                    <p className="text-primary font-semibold mt-1">Résultat: +27M FCFA</p>
-                  </div>
-                  <div className="p-2 border-l-4 border-green-500">
-                    <p className="font-medium">Hypothèse favorable</p>
-                    <p className="text-gray-600">CA +30%, churn -50%</p>
-                    <p className="text-green-600 font-semibold mt-1">Résultat: +13M FCFA</p>
-                  </div>
-                </div>
-              </div>
             </div>
           )}
         </div>
 
-        {/* Pages supplémentaires - Indicateurs avancés */}
-        <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">📈 Indicateurs de performance avancés</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Évolution du CA */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Évolution du Chiffre d'Affaires</h3>
-              <div className="h-56">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={revenueData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="year" />
-                    <YAxis />
-                    <Tooltip formatter={(value) => `${value}M FCFA`} />
-                    <Line type="monotone" dataKey="revenue" name="CA" stroke="#0A66C2" strokeWidth={2} />
-                    <Line type="monotone" dataKey="profit" name="Profit" stroke="#10B981" strokeWidth={2} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            {/* Marge bénéficiaire */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Évolution de la marge</h3>
-              <div className="h-56">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={[
-                    { year: 'N+1', margin: -50 },
-                    { year: 'N+2', margin: 20 },
-                    { year: 'N+3', margin: 30 },
-                    { year: 'N+4', margin: 38 },
-                    { year: 'N+5', margin: 40 },
-                  ]}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="year" />
-                    <YAxis domain={[-60, 60]} />
-                    <Tooltip formatter={(value) => `${value}%`} />
-                    <Line type="monotone" dataKey="margin" name="Marge EBITDA" stroke="#F59E0B" strokeWidth={3} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </div>
-
-          {/* Synthèse financière */}
-          <div className="mt-6 p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg">
-            <h3 className="font-bold text-gray-800 dark:text-gray-200 mb-3">📝 Synthèse financière</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div>
-                <p className="text-gray-500">💰 Besoin de financement initial</p>
-                <p className="text-xl font-bold text-primary">100M FCFA</p>
-                <p className="text-xs text-gray-400">Développement + Marketing + Infrastructure</p>
-              </div>
-              <div>
-                <p className="text-gray-500">🎯 Seuil de rentabilité</p>
-                <p className="text-xl font-bold text-green-600">18 mois</p>
-                <p className="text-xs text-gray-400">Atteint en N+2 avec 250M FCFA de CA</p>
-              </div>
-              <div>
-                <p className="text-gray-500">📊 ROI projeté à 5 ans</p>
-                <p className="text-xl font-bold text-primary">320%</p>
-                <p className="text-xs text-gray-400">Sur la base du scénario réaliste</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Pied de page */}
         <div className="mt-6 text-center text-sm text-gray-500 print:mt-4">
           <p>Document confidentiel généré par GMENAI IA - {new Date().toLocaleDateString('fr-FR')}</p>
           <p className="text-xs">📊 Prévisions en FCFA - Adapté aux marchés africains - Intégrations Mobile Money</p>
