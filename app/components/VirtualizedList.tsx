@@ -1,36 +1,26 @@
-﻿// app/components/VirtualizedList.tsx
+﻿// app/components/VirtualizedList.tsx - Version simplifiée
 'use client';
 
-import { FixedSizeList as List } from 'react-window';
 import { memo } from 'react';
 
 interface VirtualizedListProps {
   items: any[];
-  height: number;
-  itemHeight: number;
   renderItem: (item: any, index: number) => React.ReactNode;
   emptyMessage?: string;
 }
 
-const Row = memo(({ data, index, style }: any) => {
-  const { items, renderItem } = data;
-  return (
-    <div style={style}>
-      {renderItem(items[index], index)}
-    </div>
-  );
+const ListItem = memo(({ item, index, renderItem }: any) => {
+  return renderItem(item, index);
 });
 
-Row.displayName = 'Row';
+ListItem.displayName = 'ListItem';
 
 export default function VirtualizedList({ 
   items, 
-  height, 
-  itemHeight, 
   renderItem,
   emptyMessage = "Aucun résultat"
 }: VirtualizedListProps) {
-  if (items.length === 0) {
+  if (!items || items.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500 dark:text-gray-400">
         {emptyMessage}
@@ -39,14 +29,10 @@ export default function VirtualizedList({
   }
 
   return (
-    <List
-      height={height}
-      itemCount={items.length}
-      itemSize={itemHeight}
-      width="100%"
-      itemData={{ items, renderItem }}
-    >
-      {Row}
-    </List>
+    <div className="space-y-2">
+      {items.map((item, index) => (
+        <ListItem key={index} item={item} index={index} renderItem={renderItem} />
+      ))}
+    </div>
   );
 }

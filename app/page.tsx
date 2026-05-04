@@ -1,120 +1,47 @@
-﻿// app/page.tsx (version corrigée avec section Ressources)
+﻿// app/page.tsx - Version stable
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import ModulesGrid from './components/ModulesGrid';
-import FinancialOutputs from './components/FinancialOutputs';
-import HowItWorks from './components/HowItWorks';
-import AfricaAdaptation from './components/AfricaAdaptation';
-import Pricing from './components/Pricing';
-import Testimonials from './components/Testimonials';
-import Faq from './components/Faq';
 import Footer from './components/Footer';
-import BusinessPlanGenerator from './components/BusinessPlanGenerator';
-import BusinessPlanResult from './components/BusinessPlanResult';
-import SearchAssistant from './components/SearchAssistant';
+import DemoBusinessPlan from './components/DemoBusinessPlan';
 
 export default function Home() {
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const [showGenerator, setShowGenerator] = useState(false);
-  const [savedBusinessPlan, setSavedBusinessPlan] = useState<any>(null);
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('showResult') === 'true') {
-      const storedBP = sessionStorage.getItem('currentBusinessPlan');
-      if (storedBP) {
-        setSavedBusinessPlan(JSON.parse(storedBP));
-        setShowGenerator(false);
-      }
-    }
-  }, []);
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const handleDownloadPDF = () => {
-    window.print();
-  };
-
-  const handleDataEnriched = (data: any) => {
-    console.log('Données enrichies reçues:', data);
-  };
-
-  if (savedBusinessPlan) {
-    return (
-      <>
-        <BusinessPlanResult 
-          result={savedBusinessPlan.result} 
-          companyName={savedBusinessPlan.companyName}
-          formData={savedBusinessPlan.formData}
-          onDownloadPDF={handleDownloadPDF}
-          onPrint={handlePrint}
-        />
-        <SearchAssistant onDataEnriched={handleDataEnriched} />
-      </>
-    );
-  }
 
   if (showGenerator) {
-    return <BusinessPlanGenerator />;
+    return <DemoBusinessPlan />;
   }
 
   return (
     <main>
       <Header onSignupClick={() => setIsSignupOpen(true)} />
-      <Hero onSignupClick={() => setShowGenerator(true)} />
-      <ModulesGrid />
-      <FinancialOutputs />
-      <HowItWorks />
-      <AfricaAdaptation />
-      <Pricing />
-      <Testimonials />
-      <Faq />
       
-      {/* Section Ressources */}
-      <section id="ressources" className="py-20 px-4 bg-gray-50 dark:bg-gray-800">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Ressources GMENAI
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              Guides, templates et outils pour réussir votre business plan
-            </p>
+      {/* Hero section avec CTA */}
+      <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 to-white">
+        <div className="container mx-auto max-w-6xl text-center">
+          <div className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full mb-6">
+            🎉 Gratuit - aucun paiement initial requis
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-4xl mb-3">📘</div>
-              <h3 className="text-xl font-semibold mb-2">Guide du business plan</h3>
-              <p className="text-gray-600 dark:text-gray-400">Créez un business plan bancable</p>
-              <span className="inline-block mt-3 text-primary text-sm">À venir →</span>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-4xl mb-3">📊</div>
-              <h3 className="text-xl font-semibold mb-2">Template Excel</h3>
-              <p className="text-gray-600 dark:text-gray-400">Prévisions financières en FCFA</p>
-              <span className="inline-block mt-3 text-primary text-sm">À venir →</span>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-4xl mb-3">🎬</div>
-              <h3 className="text-xl font-semibold mb-2">Tutoriels vidéo</h3>
-              <p className="text-gray-600 dark:text-gray-400">Tutos pas à pas</p>
-              <span className="inline-block mt-3 text-primary text-sm">À venir →</span>
-            </div>
-          </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Générez un business plan bancable<br/>
+            <span className="text-primary">en moins de 10 minutes</span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            8 modules IA, prévisions financières en FCFA, intégration Mobile Money.
+            Le business plan que les investisseurs et banques africaines attendent.
+          </p>
+          <button
+            onClick={() => setShowGenerator(true)}
+            className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-all"
+          >
+            🚀 Démarrer mon business plan
+          </button>
         </div>
       </section>
       
       <Footer onSignupClick={() => setIsSignupOpen(true)} isSignupOpen={isSignupOpen} setIsSignupOpen={setIsSignupOpen} />
-      <SearchAssistant onDataEnriched={handleDataEnriched} />
     </main>
   );
 }
-

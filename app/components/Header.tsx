@@ -1,7 +1,7 @@
 ﻿'use client';
 
-import { useState } from 'react';
-import { Menu, X, LogIn } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,11 +12,11 @@ interface HeaderProps {
 export default function Header({ onSignupClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Scroll vers la section Resources
   useEffect(() => {
-    // Gérer le scroll vers la section Resources
     const hash = window.location.hash;
-    if (hash === '#Resources') {
-      const element = document.getElementById('Resources');
+    if (hash === '#ressources-section' || hash === '#Resources') {
+      const element = document.getElementById('ressources-section');
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
@@ -26,24 +26,22 @@ export default function Header({ onSignupClick }: HeaderProps) {
   }, []);
 
   const navItems = [
-    { label: 'FonctionnalitÃ©s', href: '#modules' },
-    { label: 'Comment Ã§a marche', href: '#how-it-works' },
+    { label: 'Fonctionnalités', href: '#modules' },
+    { label: 'Comment ça marche', href: '#how-it-works' },
     { label: 'Tarifs', href: '#pricing' },
-    { label: 'Resources', href: '/Resources' },
+    { label: 'Ressources', href: '#ressources-section' },
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <div className="flex items-center">
             <a href="/" className="text-2xl font-bold text-primary">
               GMENAI
             </a>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
@@ -56,7 +54,7 @@ export default function Header({ onSignupClick }: HeaderProps) {
             ))}
             <a
               href="#"
-              className="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+              className="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors"
             >
               Connexion
             </a>
@@ -69,7 +67,6 @@ export default function Header({ onSignupClick }: HeaderProps) {
             <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
             <ThemeToggle />
             <button
@@ -81,7 +78,6 @@ export default function Header({ onSignupClick }: HeaderProps) {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -124,8 +120,4 @@ export default function Header({ onSignupClick }: HeaderProps) {
     </header>
   );
 }
-
-
-
-
 
