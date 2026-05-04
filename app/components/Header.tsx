@@ -13,10 +13,10 @@ export default function Header({ onSignupClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Gérer le scroll vers la section Ressources
+    // Gérer le scroll vers la section Resources
     const hash = window.location.hash;
-    if (hash === '#ressources') {
-      const element = document.getElementById('ressources');
+    if (hash === '#Resources') {
+      const element = document.getElementById('Resources');
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
@@ -29,7 +29,7 @@ export default function Header({ onSignupClick }: HeaderProps) {
     { label: 'FonctionnalitÃ©s', href: '#modules' },
     { label: 'Comment Ã§a marche', href: '#how-it-works' },
     { label: 'Tarifs', href: '#pricing' },
-    { label: 'Ressources', href: '/ressources' },
+    { label: 'Resources', href: '/Resources' },
   ];
 
   return (
@@ -124,6 +124,7 @@ export default function Header({ onSignupClick }: HeaderProps) {
     </header>
   );
 }
+
 
 
 
