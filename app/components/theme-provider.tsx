@@ -1,8 +1,12 @@
-﻿'use client';
+﻿// app/components/theme-provider.tsx
+'use client';
 
 import * as React from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
-export function ThemeProvider({ children, ...props }: any) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+export function ThemeProvider({ 
+  children, 
+  ...props 
+}: React.ComponentProps<typeof NextThemesProvider>) {
+  return React.createElement(NextThemesProvider, props, children);
 }
