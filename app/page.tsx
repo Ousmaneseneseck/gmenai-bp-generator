@@ -51,7 +51,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section Fonctionnalités / 8 modules IA */}
+      {/* Section Fonctionnalités - 8 modules IA */}
       <section id="features" className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
@@ -59,23 +59,14 @@ export default function Home() {
             <p className="text-lg text-gray-600">Chaque bloc de votre business plan est généré par une IA spécialisée</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: 'Étude de marché', subtitle: 'Customer Intelligence', desc: 'Analyse marché local + concurrence', emoji: '📊' },
-              { title: 'Proposition de valeur', subtitle: 'Value Generator AI', desc: 'UVP unique et adaptée', emoji: '💡' },
-              { title: 'Go-to-market', subtitle: 'Go-To-Market AI', desc: "Canaux d'acquisition Mobile Money", emoji: '🚀' },
-              { title: 'Modèle de revenus', subtitle: 'Revenue Intelligence', desc: 'Pricing + ARR/MRR', emoji: '💰' },
-              { title: 'Organisation & RH', subtitle: 'Resource Optimizer', desc: 'Organigramme + masse salariale FCFA', emoji: '👥' },
-              { title: 'Process & opérations', subtitle: 'Operations AI', desc: 'Workflows + KPIs', emoji: '⚙️' },
-              { title: 'Partenariats', subtitle: 'Ecosystem Manager', desc: 'Scoring partenaires locaux', emoji: '🤝' },
-              { title: 'Coûts & risques', subtitle: 'Cost & Risk AI', desc: 'CAPEX/OPEX + 3 scénarios', emoji: '🛡️' }
-            ].map((m, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition">
-                <div className="text-3xl mb-3">{m.emoji}</div>
-                <h3 className="text-xl font-semibold mb-1">{m.title}</h3>
-                <p className="text-sm text-primary mb-2">{m.subtitle}</p>
-                <p className="text-gray-600 text-sm">{m.desc}</p>
-              </div>
-            ))}
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">📊</div><h3 className="text-xl font-semibold mb-1">Étude de marché</h3><p className="text-sm text-primary mb-2">Customer Intelligence</p><p className="text-gray-600 text-sm">Analyse marché local + concurrence</p></div>
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">💡</div><h3 className="text-xl font-semibold mb-1">Proposition de valeur</h3><p className="text-sm text-primary mb-2">Value Generator AI</p><p className="text-gray-600 text-sm">UVP unique et adaptée</p></div>
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">🚀</div><h3 className="text-xl font-semibold mb-1">Go-to-market</h3><p className="text-sm text-primary mb-2">Go-To-Market AI</p><p className="text-gray-600 text-sm">Canaux d'acquisition Mobile Money</p></div>
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">💰</div><h3 className="text-xl font-semibold mb-1">Modèle de revenus</h3><p className="text-sm text-primary mb-2">Revenue Intelligence</p><p className="text-gray-600 text-sm">Pricing + ARR/MRR</p></div>
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">👥</div><h3 className="text-xl font-semibold mb-1">Organisation & RH</h3><p className="text-sm text-primary mb-2">Resource Optimizer</p><p className="text-gray-600 text-sm">Organigramme + masse salariale FCFA</p></div>
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">⚙️</div><h3 className="text-xl font-semibold mb-1">Process & opérations</h3><p className="text-sm text-primary mb-2">Operations AI</p><p className="text-gray-600 text-sm">Workflows + KPIs</p></div>
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">🤝</div><h3 className="text-xl font-semibold mb-1">Partenariats</h3><p className="text-sm text-primary mb-2">Ecosystem Manager</p><p className="text-gray-600 text-sm">Scoring partenaires locaux</p></div>
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition"><div className="text-3xl mb-3">🛡️</div><h3 className="text-xl font-semibold mb-1">Coûts & risques</h3><p className="text-sm text-primary mb-2">Cost & Risk AI</p><p className="text-gray-600 text-sm">CAPEX/OPEX + 3 scénarios</p></div>
           </div>
         </div>
       </section>
@@ -88,19 +79,10 @@ export default function Home() {
             <p className="text-lg text-gray-600">4 étapes simples pour votre business plan</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-            {[
-              { step: '1', title: 'Remplir', desc: 'Formulaire court : secteur, localisation, type de revenus', emoji: '📝' },
-              { step: '2', title: 'Générer', desc: 'Nos 8 IA travaillent en temps réel', emoji: '⚡' },
-              { step: '3', title: 'Exporter', desc: 'PDF, Excel, DOCX ou lien sécurisé', emoji: '📎' },
-              { step: '4', title: 'Partager', desc: 'Envoyez à vos partenaires ou investisseurs', emoji: '🤝' }
-            ].map((s, i) => (
-              <div key={i} className="bg-white rounded-xl p-6 shadow-sm">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold text-primary">{s.step}</div>
-                <div className="text-3xl mb-2">{s.emoji}</div>
-                <h3 className="text-xl font-semibold mb-2">{s.title}</h3>
-                <p className="text-gray-500 text-sm">{s.desc}</p>
-              </div>
-            ))}
+            <div className="bg-white rounded-xl p-6 shadow-sm"><div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold text-primary">1</div><div className="text-3xl mb-2">📝</div><h3 className="text-xl font-semibold mb-2">Remplir</h3><p className="text-gray-500 text-sm">Formulaire court : secteur, localisation, type de revenus</p></div>
+            <div className="bg-white rounded-xl p-6 shadow-sm"><div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold text-primary">2</div><div className="text-3xl mb-2">⚡</div><h3 className="text-xl font-semibold mb-2">Générer</h3><p className="text-gray-500 text-sm">Nos 8 IA travaillent en temps réel</p></div>
+            <div className="bg-white rounded-xl p-6 shadow-sm"><div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold text-primary">3</div><div className="text-3xl mb-2">📎</div><h3 className="text-xl font-semibold mb-2">Exporter</h3><p className="text-gray-500 text-sm">PDF, Excel, DOCX ou lien sécurisé</p></div>
+            <div className="bg-white rounded-xl p-6 shadow-sm"><div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold text-primary">4</div><div className="text-3xl mb-2">🤝</div><h3 className="text-xl font-semibold mb-2">Partager</h3><p className="text-gray-500 text-sm">Envoyez à vos partenaires ou investisseurs</p></div>
           </div>
         </div>
       </section>
@@ -113,50 +95,22 @@ export default function Home() {
             <p className="text-lg text-gray-600">Choisissez le plan adapté à vos besoins</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: 'Gratuit', price: '0 FCFA', features: ['1 business plan', 'Export PDF', '7 jours de validité', 'Support communautaire'], popular: false },
-              { name: 'Pro', price: '49 500 FCFA/mois', features: ['Business plans illimités', 'Export Excel/DOCX', '3 scénarios financiers', 'Support prioritaire 24/7', 'Intégration Mobile Money'], popular: true },
-              { name: 'Enterprise', price: 'Sur devis', features: ['API dédiée', 'RBAC avancé', 'SSO & authentification', 'Cloud dédié', 'SLA personnalisé'], popular: false }
-            ].map((p, i) => (
-              <div key={i} className={`bg-white rounded-xl p-6 shadow-lg border ${p.popular ? 'border-primary ring-2 ring-primary/20' : 'border-gray-200'}`}>
-                {p.popular && <div className="text-center text-primary text-sm font-semibold mb-2">🔥 Le plus populaire</div>}
-                <h3 className="text-2xl font-bold text-center mb-2">{p.name}</h3>
-                <div className="text-center text-3xl font-bold text-primary mb-4">{p.price}</div>
-                <ul className="space-y-2 mb-6">
-                  {p.features.map((f, j) => <li key={j} className="text-gray-600 flex items-center gap-2 text-sm">✓ {f}</li>)}
-                </ul>
-                <button className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/90 transition">Commencer</button>
-              </div>
-            ))}
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200"><h3 className="text-2xl font-bold text-center mb-2">Gratuit</h3><div className="text-center text-3xl font-bold text-primary mb-4">0 FCFA</div><ul className="space-y-2 mb-6"><li className="text-gray-600 text-sm">✓ 1 business plan</li><li className="text-gray-600 text-sm">✓ Export PDF</li><li className="text-gray-600 text-sm">✓ 7 jours de validité</li><li className="text-gray-600 text-sm">✓ Support communautaire</li></ul><button className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/90 transition">Commencer</button></div>
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-primary ring-2 ring-primary/20 relative"><div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-3 py-1 rounded-full">🔥 Le plus populaire</div><h3 className="text-2xl font-bold text-center mb-2">Pro</h3><div className="text-center text-3xl font-bold text-primary mb-4">49 500 FCFA/mois</div><ul className="space-y-2 mb-6"><li className="text-gray-600 text-sm">✓ Business plans illimités</li><li className="text-gray-600 text-sm">✓ Export Excel/DOCX</li><li className="text-gray-600 text-sm">✓ 3 scénarios financiers</li><li className="text-gray-600 text-sm">✓ Support prioritaire 24/7</li><li className="text-gray-600 text-sm">✓ Intégration Mobile Money</li></ul><button className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/90 transition">Commencer</button></div>
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200"><h3 className="text-2xl font-bold text-center mb-2">Enterprise</h3><div className="text-center text-3xl font-bold text-primary mb-4">Sur devis</div><ul className="space-y-2 mb-6"><li className="text-gray-600 text-sm">✓ API dédiée</li><li className="text-gray-600 text-sm">✓ RBAC avancé</li><li className="text-gray-600 text-sm">✓ SSO & authentification</li><li className="text-gray-600 text-sm">✓ Cloud dédié</li><li className="text-gray-600 text-sm">✓ SLA personnalisé</li></ul><button className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/90 transition">Contacter</button></div>
           </div>
         </div>
       </section>
 
-      {/* Section Ressources (déjà présente) */}
+      {/* Section Ressources */}
       <section id="resources" className="py-20 px-4 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">📚 Ressources GMENAI</h2>
             <p className="text-lg text-gray-600">Guides, templates et outils pour vous accompagner dans votre projet</p>
           </div>
-          
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6">📘 Guides & E-books</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">📖</div><h4 className="text-xl font-bold mb-2">Guide du business plan bancable</h4><p className="text-gray-600 mb-4">63 pages pour convaincre banques et investisseurs</p><button className="text-primary font-semibold">Télécharger →</button></div>
-              <div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">💰</div><h4 className="text-xl font-bold mb-2">Guide des prévisions financières</h4><p className="text-gray-600 mb-4">Maîtrisez vos projections en FCFA</p><button className="text-primary font-semibold">Télécharger →</button></div>
-              <div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">📱</div><h4 className="text-xl font-bold mb-2">Guide Mobile Money</h4><p className="text-gray-600 mb-4">Intégrez Orange Money, Wave, M-Pesa</p><button className="text-primary font-semibold">Télécharger →</button></div>
-            </div>
-          </div>
-
-          <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-6">📊 Templates & Outils</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">📈</div><h4 className="text-xl font-bold mb-2">Dashboard financier Excel</h4><p className="text-gray-600 mb-4">Tableau de bord KPIs + projections 5 ans</p><button className="text-primary font-semibold">Télécharger →</button></div>
-              <div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">🎯</div><h4 className="text-xl font-bold mb-2">Pitch Deck template</h4><p className="text-gray-600 mb-4">Présentation professionnelle pour investisseurs</p><button className="text-primary font-semibold">Télécharger →</button></div>
-              <div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">✅</div><h4 className="text-xl font-bold mb-2">Checklist financement</h4><p className="text-gray-600 mb-4">Préparez votre dossier de financement</p><button className="text-primary font-semibold">Télécharger →</button></div>
-            </div>
-          </div>
+          <div className="mb-12"><h3 className="text-2xl font-semibold mb-6">📘 Guides & E-books</h3><div className="grid grid-cols-1 md:grid-cols-3 gap-6"><div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">📖</div><h4 className="text-xl font-bold mb-2">Guide du business plan bancable</h4><p className="text-gray-600 mb-4">63 pages pour convaincre banques et investisseurs</p><button className="text-primary font-semibold">Télécharger →</button></div><div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">💰</div><h4 className="text-xl font-bold mb-2">Guide des prévisions financières</h4><p className="text-gray-600 mb-4">Maîtrisez vos projections en FCFA</p><button className="text-primary font-semibold">Télécharger →</button></div><div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">📱</div><h4 className="text-xl font-bold mb-2">Guide Mobile Money</h4><p className="text-gray-600 mb-4">Intégrez Orange Money, Wave, M-Pesa</p><button className="text-primary font-semibold">Télécharger →</button></div></div></div>
+          <div><h3 className="text-2xl font-semibold mb-6">📊 Templates & Outils</h3><div className="grid grid-cols-1 md:grid-cols-3 gap-6"><div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">📈</div><h4 className="text-xl font-bold mb-2">Dashboard financier Excel</h4><p className="text-gray-600 mb-4">Tableau de bord KPIs + projections 5 ans</p><button className="text-primary font-semibold">Télécharger →</button></div><div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">🎯</div><h4 className="text-xl font-bold mb-2">Pitch Deck template</h4><p className="text-gray-600 mb-4">Présentation professionnelle pour investisseurs</p><button className="text-primary font-semibold">Télécharger →</button></div><div className="bg-white rounded-xl p-6 shadow-sm"><div className="text-4xl mb-3">✅</div><h4 className="text-xl font-bold mb-2">Checklist financement</h4><p className="text-gray-600 mb-4">Préparez votre dossier de financement</p><button className="text-primary font-semibold">Télécharger →</button></div></div></div>
         </div>
       </section>
 
