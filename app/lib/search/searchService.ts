@@ -1,4 +1,4 @@
-ï»¿// app/lib/search/searchService.ts
+// app/lib/search/searchService.ts
 import axios from 'axios';
 
 export interface EnrichedData {
@@ -138,7 +138,7 @@ class SearchService {
     return data;
   }
 
-  private async getMarketData(sector: string, country: string): Promise<MarketData> {
+  public async getMarketData(sector: string, country: string): Promise<MarketData> {
     const marketDataMap: Record<string, MarketData> = {
       'Technologie/SaaS': { 
         size: '850M FCFA', 
@@ -146,10 +146,10 @@ class SearchService {
         tam: '2 500M FCFA',
         sam: '850M FCFA',
         som: '120M FCFA',
-        trends: ['Cloud adoption (+35% YoY)', 'IA gÃ©nÃ©rative (marchÃ© x2 en 2 ans)', 'API Ã©conomie (croissance 40%)', 'SaaS penetration (15% â†’ 35%)', 'Low-code/No-code'],
+        trends: ['Cloud adoption (+35% YoY)', 'IA générative (marché x2 en 2 ans)', 'API économie (croissance 40%)', 'SaaS penetration (15% ? 35%)', 'Low-code/No-code'],
         keyPlayers: ['Microsoft Afrique (35% PDM)', 'Oracle (20% PDM)', 'Salesforce (15% PDM)', 'Startups locales (30% PDM)'],
-        marketDrivers: ['Digitalisation accÃ©lÃ©rÃ©e', 'Besoins de productivitÃ©', 'TÃ©lÃ©travail', 'Mobile Money'],
-        marketBarriers: ['Connexion internet', 'CoÃ»t des solutions', 'Formation utilisateurs']
+        marketDrivers: ['Digitalisation accélérée', 'Besoins de productivité', 'Télétravail', 'Mobile Money'],
+        marketBarriers: ['Connexion internet', 'Coût des solutions', 'Formation utilisateurs']
       },
       'Agriculture': { 
         size: '1 200M FCFA', 
@@ -157,10 +157,10 @@ class SearchService {
         tam: '3 500M FCFA',
         sam: '1 200M FCFA',
         som: '180M FCFA',
-        trends: ['AgriTech (x3 en 2 ans)', 'Drone farming', 'Mobile payments 85%', 'Smart farming', 'Blockchain traÃ§abilitÃ©'],
+        trends: ['AgriTech (x3 en 2 ans)', 'Drone farming', 'Mobile payments 85%', 'Smart farming', 'Blockchain traçabilité'],
         keyPlayers: ['Twingo (25% PDM)', 'AgriData (20% PDM)', 'FarmTech (15% PDM)', 'Acteurs locaux (40% PDM)'],
-        marketDrivers: ['SÃ©curitÃ© alimentaire', 'Changement climatique', 'Subventions agricoles'],
-        marketBarriers: ['AccÃ¨s au financement', 'Formation agriculteurs', 'Infrastructures']
+        marketDrivers: ['Sécurité alimentaire', 'Changement climatique', 'Subventions agricoles'],
+        marketBarriers: ['Accès au financement', 'Formation agriculteurs', 'Infrastructures']
       },
       'Commerce/Retail': { 
         size: '2 500M FCFA', 
@@ -168,23 +168,23 @@ class SearchService {
         tam: '5 000M FCFA',
         sam: '2 500M FCFA',
         som: '300M FCFA',
-        trends: ['E-commerce +45%', 'Social commerce', 'Livraison instantanÃ©e', 'Click & collect', 'Cashless payment'],
+        trends: ['E-commerce +45%', 'Social commerce', 'Livraison instantanée', 'Click & collect', 'Cashless payment'],
         keyPlayers: ['Jumia (30% PDM)', 'AfriMart (25% PDM)', 'Kongo (20% PDM)', 'Autres (25% PDM)'],
         marketDrivers: ['Classe moyenne croissante', 'Internet mobile', 'Urbanisation'],
         marketBarriers: ['Logistique', 'Confiance consommateur', 'Frais de livraison']
       },
-      'SantÃ©': { 
+      'Santé': { 
         size: '600M FCFA', 
         growth: '22%',
         tam: '1 800M FCFA',
         sam: '600M FCFA',
         som: '90M FCFA',
-        trends: ['TÃ©lÃ©mÃ©decine (x2)', 'IA diagnostic', 'Mobile santÃ©', 'Dossiers mÃ©dicaux digitaux', 'IoT santÃ©'],
+        trends: ['Télémédecine (x2)', 'IA diagnostic', 'Mobile santé', 'Dossiers médicaux digitaux', 'IoT santé'],
         keyPlayers: ['LifeBank (30% PDM)', 'Helium Health (25% PDM)', 'mPharma (20% PDM)', 'Autres (25% PDM)'],
-        marketDrivers: ['DÃ©mographie', 'COVID-19', 'Digitalisation'],
-        marketBarriers: ['RÃ©glementation', 'ConfidentialitÃ© donnÃ©es', 'Infrastructure']
+        marketDrivers: ['Démographie', 'COVID-19', 'Digitalisation'],
+        marketBarriers: ['Réglementation', 'Confidentialité données', 'Infrastructure']
       },
-      'Ã‰ducation': { 
+      'Éducation': { 
         size: '400M FCFA', 
         growth: '25%',
         tam: '1 200M FCFA',
@@ -192,8 +192,8 @@ class SearchService {
         som: '60M FCFA',
         trends: ['E-learning +60%', 'EdTech mobile', 'Certification en ligne', 'Formation continue', 'Micro-learning'],
         keyPlayers: ['uLesson (35% PDM)', 'EduTech (25% PDM)', 'Schoolable (20% PDM)', 'Autres (20% PDM)'],
-        marketDrivers: ['Jeunesse population', 'COVID-19', 'Besoins compÃ©tences'],
-        marketBarriers: ['AccÃ¨s internet', 'CoÃ»t formations', 'Certification reconnue']
+        marketDrivers: ['Jeunesse population', 'COVID-19', 'Besoins compétences'],
+        marketBarriers: ['Accès internet', 'Coût formations', 'Certification reconnue']
       },
     };
     
@@ -204,16 +204,16 @@ class SearchService {
       sam: '500M FCFA',
       som: '75M FCFA',
       trends: ['Digitalisation', 'Mobile first', 'Innovation', 'Transformation digitale'],
-      keyPlayers: ['Acteurs locaux', 'Startups innovantes', 'OpÃ©rateurs historiques'],
+      keyPlayers: ['Acteurs locaux', 'Startups innovantes', 'Opérateurs historiques'],
       marketDrivers: ['Innovation', 'Demande croissante', 'Digitalisation'],
-      marketBarriers: ['RÃ©glementation', 'Concurrence', 'AccÃ¨s financement']
+      marketBarriers: ['Réglementation', 'Concurrence', 'Accès financement']
     };
   }
 
-  private async getEconomicData(country: string): Promise<EconomicData> {
+  public async getEconomicData(country: string): Promise<EconomicData> {
     const economicDataMap: Record<string, EconomicData> = {
-      'SÃ©nÃ©gal': { 
-        gdp: '27.5Mds â‚¬', 
+      'Sénégal': { 
+        gdp: '27.5Mds €', 
         gdpGrowth: '5.8%',
         inflation: '3.2%', 
         currency: 'FCFA', 
@@ -221,10 +221,10 @@ class SearchService {
         internetPenetration: '42%',
         population: '17.5M',
         unemployment: '6.5%',
-        businessClimate: 'En amÃ©lioration (+5 places Doing Business)'
+        businessClimate: 'En amélioration (+5 places Doing Business)'
       },
-      "CÃ´te d'Ivoire": { 
-        gdp: '70.1Mds â‚¬', 
+      "Côte d'Ivoire": { 
+        gdp: '70.1Mds €', 
         gdpGrowth: '6.2%',
         inflation: '3.5%', 
         currency: 'FCFA', 
@@ -232,10 +232,10 @@ class SearchService {
         internetPenetration: '48%',
         population: '26.4M',
         unemployment: '4.2%',
-        businessClimate: 'Favorable (2Ã¨me pays CEDEAO)'
+        businessClimate: 'Favorable (2ème pays CEDEAO)'
       },
       'Cameroun': { 
-        gdp: '44.5Mds â‚¬', 
+        gdp: '44.5Mds €', 
         gdpGrowth: '4.5%',
         inflation: '3.0%', 
         currency: 'FCFA', 
@@ -243,7 +243,7 @@ class SearchService {
         internetPenetration: '35%',
         population: '26.5M',
         unemployment: '4.8%',
-        businessClimate: 'Stable en amÃ©lioration'
+        businessClimate: 'Stable en amélioration'
       },
     };
     
@@ -256,46 +256,46 @@ class SearchService {
       internetPenetration: '40%',
       population: 'N/A',
       unemployment: 'N/A',
-      businessClimate: 'En dÃ©veloppement'
+      businessClimate: 'En développement'
     };
   }
 
-  private async getCompetitors(sector: string, country: string): Promise<Competitor[]> {
+  public async getCompetitors(sector: string, country: string): Promise<Competitor[]> {
     const competitorsMap: Record<string, Competitor[]> = {
       'Technologie/SaaS': [
-        { name: 'TechLeader Afrique', description: 'Leader historique du marchÃ©', marketShare: '35%', strengths: ['RÃ©seau 15 pays', 'Marque forte', 'Support 24/7'], weaknesses: ['Innovation lente', 'Prix Ã©levÃ©s'], funding: '50Mâ‚¬', founded: '2010', headquarters: 'Dakar' },
-        { name: 'DigitalSolutions', description: 'Innovateur local reconnu', marketShare: '20%', strengths: ['AgilitÃ©', 'Support local', 'Prix compÃ©titifs'], weaknesses: ['Scale limitÃ©e', '3 pays'], funding: '15Mâ‚¬', founded: '2015', headquarters: 'Abidjan' },
-        { name: 'MobileFirst', description: 'SpÃ©cialiste Mobile Money', marketShare: '15%', strengths: ['IntÃ©gration paiement', 'UI simple'], weaknesses: ['FonctionnalitÃ©s limitÃ©es'], funding: '8Mâ‚¬', founded: '2018', headquarters: 'Douala' },
+        { name: 'TechLeader Afrique', description: 'Leader historique du marché', marketShare: '35%', strengths: ['Réseau 15 pays', 'Marque forte', 'Support 24/7'], weaknesses: ['Innovation lente', 'Prix élevés'], funding: '50M€', founded: '2010', headquarters: 'Dakar' },
+        { name: 'DigitalSolutions', description: 'Innovateur local reconnu', marketShare: '20%', strengths: ['Agilité', 'Support local', 'Prix compétitifs'], weaknesses: ['Scale limitée', '3 pays'], funding: '15M€', founded: '2015', headquarters: 'Abidjan' },
+        { name: 'MobileFirst', description: 'Spécialiste Mobile Money', marketShare: '15%', strengths: ['Intégration paiement', 'UI simple'], weaknesses: ['Fonctionnalités limitées'], funding: '8M€', founded: '2018', headquarters: 'Douala' },
       ],
     };
     
     return competitorsMap[sector] || [
-      { name: 'Concurrent National', description: 'Acteur majeur', marketShare: '30%', strengths: ['PrÃ©sence Ã©tablie'], weaknesses: ['Innovation limitÃ©e'], funding: 'N/A', founded: 'N/A', headquarters: country },
-      { name: 'Startup Innovante', description: 'Nouvel entrant', marketShare: '10%', strengths: ['AgilitÃ©', 'Tech moderne'], weaknesses: ['Ressources limitÃ©es'], funding: '2Mâ‚¬', founded: '2020', headquarters: country },
+      { name: 'Concurrent National', description: 'Acteur majeur', marketShare: '30%', strengths: ['Présence établie'], weaknesses: ['Innovation limitée'], funding: 'N/A', founded: 'N/A', headquarters: country },
+      { name: 'Startup Innovante', description: 'Nouvel entrant', marketShare: '10%', strengths: ['Agilité', 'Tech moderne'], weaknesses: ['Ressources limitées'], funding: '2M€', founded: '2020', headquarters: country },
     ];
   }
 
-  private async getOpportunities(sector: string, country: string): Promise<Opportunity[]> {
+  public async getOpportunities(sector: string, country: string): Promise<Opportunity[]> {
     const economic = await this.getEconomicData(country);
     return [
-      { title: 'Mobile Money en forte croissance', description: `${country} atteint un taux de pÃ©nÃ©tration de ${economic.mobileMoneyPenetration}, idÃ©al pour les paiements digitaux`, impact: 'High', timeline: '0-6 mois', potentialRevenue: '50-100M FCFA' },
-      { title: 'Digitalisation accÃ©lÃ©rÃ©e', description: `Le secteur ${sector} connaÃ®t une transformation digitale rapide post-COVID avec +30% d'adoption`, impact: 'High', timeline: '0-12 mois', potentialRevenue: '80-150M FCFA' },
-      { title: 'Besoins non satisfaits', description: 'Forte demande de solutions locales et abordables avec un gap de marchÃ© estimÃ© Ã  40%', impact: 'High', timeline: '6-18 mois', potentialRevenue: '100-200M FCFA' },
-      { title: 'Soutien gouvernemental', description: 'Programmes d\'accompagnement des startups (subventions jusqu\'Ã  50M FCFA)', impact: 'Medium', timeline: '12-24 mois', potentialRevenue: '30-60M FCFA' },
-      { title: 'Expansion rÃ©gionale', description: 'MarchÃ© de la CEDEAO accessible via harmonisation rÃ©glementaire', impact: 'Medium', timeline: '18-36 mois', potentialRevenue: '200-400M FCFA' },
+      { title: 'Mobile Money en forte croissance', description: `${country} atteint un taux de pénétration de ${economic.mobileMoneyPenetration}, idéal pour les paiements digitaux`, impact: 'High', timeline: '0-6 mois', potentialRevenue: '50-100M FCFA' },
+      { title: 'Digitalisation accélérée', description: `Le secteur ${sector} connaît une transformation digitale rapide post-COVID avec +30% d'adoption`, impact: 'High', timeline: '0-12 mois', potentialRevenue: '80-150M FCFA' },
+      { title: 'Besoins non satisfaits', description: 'Forte demande de solutions locales et abordables avec un gap de marché estimé à 40%', impact: 'High', timeline: '6-18 mois', potentialRevenue: '100-200M FCFA' },
+      { title: 'Soutien gouvernemental', description: 'Programmes d\'accompagnement des startups (subventions jusqu\'à 50M FCFA)', impact: 'Medium', timeline: '12-24 mois', potentialRevenue: '30-60M FCFA' },
+      { title: 'Expansion régionale', description: 'Marché de la CEDEAO accessible via harmonisation réglementaire', impact: 'Medium', timeline: '18-36 mois', potentialRevenue: '200-400M FCFA' },
     ];
   }
 
-  private async getRegulations(sector: string, country: string): Promise<Regulation[]> {
+  public async getRegulations(sector: string, country: string): Promise<Regulation[]> {
     return [
-      { name: 'Protection des donnÃ©es (RGPD local)', description: 'Cadre lÃ©gal pour la collecte et traitement des donnÃ©es personnelles', impact: 'ConformitÃ© obligatoire', complianceCost: '2M FCFA', deadline: '2025', authority: 'ARTP' },
-      { name: 'Loi sur les FinTech', description: 'Encadrement des services financiers digitaux et Mobile Money', impact: 'OpportunitÃ© d\'intÃ©gration', complianceCost: '500k FCFA', deadline: '2024', authority: 'BCEAO' },
-      { name: 'Zone OHADA', description: 'Droit des affaires harmonisÃ© dans 17 pays', impact: 'Facilite l\'expansion rÃ©gionale', complianceCost: 'N/A', authority: 'OHADA' },
-      { name: 'Code du numÃ©rique', description: 'Cadre pour les services digitaux et e-commerce', impact: 'Ã€ respecter', complianceCost: '1M FCFA', deadline: '2024', authority: 'MinistÃ¨re Digital' },
+      { name: 'Protection des données (RGPD local)', description: 'Cadre légal pour la collecte et traitement des données personnelles', impact: 'Conformité obligatoire', complianceCost: '2M FCFA', deadline: '2025', authority: 'ARTP' },
+      { name: 'Loi sur les FinTech', description: 'Encadrement des services financiers digitaux et Mobile Money', impact: 'Opportunité d\'intégration', complianceCost: '500k FCFA', deadline: '2024', authority: 'BCEAO' },
+      { name: 'Zone OHADA', description: 'Droit des affaires harmonisé dans 17 pays', impact: 'Facilite l\'expansion régionale', complianceCost: 'N/A', authority: 'OHADA' },
+      { name: 'Code du numérique', description: 'Cadre pour les services digitaux et e-commerce', impact: 'À respecter', complianceCost: '1M FCFA', deadline: '2024', authority: 'Ministère Digital' },
     ];
   }
 
-  private async getSectorBenchmark(sector: string): Promise<Benchmark> {
+  public async getSectorBenchmark(sector: string): Promise<Benchmark> {
     const benchmarksMap: Record<string, Benchmark> = {
       'Technologie/SaaS': { 
         avgMargin: '65%', 
@@ -303,9 +303,9 @@ class SearchService {
         avgCAC: '45k FCFA', 
         avgLTV: '540k FCFA',
         avgChurn: '5%',
-        position: 'TrÃ¨s attractif - Forte croissance',
+        position: 'Très attractif - Forte croissance',
         industryScore: 85,
-        recommendation: 'Concentrez-vous sur la rÃ©duction du churn et l\'augmentation du LTV'
+        recommendation: 'Concentrez-vous sur la réduction du churn et l\'augmentation du LTV'
       },
       'Commerce/Retail': { 
         avgMargin: '45%', 
@@ -313,9 +313,9 @@ class SearchService {
         avgCAC: '35k FCFA', 
         avgLTV: '300k FCFA',
         avgChurn: '15%',
-        position: 'Mature - Potentiel modÃ©rÃ©',
+        position: 'Mature - Potentiel modéré',
         industryScore: 65,
-        recommendation: 'Optimisez la fidÃ©lisation client'
+        recommendation: 'Optimisez la fidélisation client'
       },
     };
     
@@ -331,7 +331,7 @@ class SearchService {
     };
   }
 
-  private async getFinancialRatios(sector: string): Promise<FinancialRatios> {
+  public async getFinancialRatios(sector: string): Promise<FinancialRatios> {
     return {
       cac: '45 000 FCFA',
       ltv: '540 000 FCFA',
@@ -344,29 +344,29 @@ class SearchService {
     };
   }
 
-  private async getSWOTAnalysis(sector: string, country: string): Promise<SWOTAnalysis> {
+  public async getSWOTAnalysis(sector: string, country: string): Promise<SWOTAnalysis> {
     return {
-      strengths: ['Ã‰quipe expÃ©rimentÃ©e', 'Tech propriÃ©taire', 'Partenariats Mobile Money', 'Support local', 'AgilitÃ©'],
-      weaknesses: ['Jeune marque', 'Ressources limitÃ©es', 'Scale Ã  prouver', 'VisibilitÃ© faible', 'NotoriÃ©tÃ© Ã  construire'],
-      opportunities: ['MarchÃ© en croissance 20-30%/an', 'Digitalisation post-COVID', 'Subventions Ã©tatiques', 'Mobile Money mature', 'Besoins non satisfaits'],
-      threats: ['Concurrence internationale', 'InstabilitÃ© Ã©conomique', 'Fragmentation rÃ©glementaire', 'Talents rares', 'BarriÃ¨res Ã  l\'entrÃ©e']
+      strengths: ['Équipe expérimentée', 'Tech propriétaire', 'Partenariats Mobile Money', 'Support local', 'Agilité'],
+      weaknesses: ['Jeune marque', 'Ressources limitées', 'Scale à prouver', 'Visibilité faible', 'Notoriété à construire'],
+      opportunities: ['Marché en croissance 20-30%/an', 'Digitalisation post-COVID', 'Subventions étatiques', 'Mobile Money mature', 'Besoins non satisfaits'],
+      threats: ['Concurrence internationale', 'Instabilité économique', 'Fragmentation réglementaire', 'Talents rares', 'Barrières à l\'entrée']
     };
   }
 
-  private async getTrends(sector: string, country: string): Promise<Trend[]> {
+  public async getTrends(sector: string, country: string): Promise<Trend[]> {
     return [
-      { title: 'IA GÃ©nÃ©rative', description: 'L\'IA transforme les processus mÃ©tier', impact: 'High', adoption: 'Ã‰mergent', timeframe: '1-2 ans' },
-      { title: 'Mobile-First', description: 'Solutions adaptÃ©es au mobile', impact: 'High', adoption: 'AccÃ©lÃ©rÃ©', timeframe: '0-1 an' },
-      { title: 'Low-Code/No-Code', description: 'DÃ©veloppement accÃ©lÃ©rÃ©', impact: 'Medium', adoption: 'Croissant', timeframe: '1-2 ans' },
+      { title: 'IA Générative', description: 'L\'IA transforme les processus métier', impact: 'High', adoption: 'Émergent', timeframe: '1-2 ans' },
+      { title: 'Mobile-First', description: 'Solutions adaptées au mobile', impact: 'High', adoption: 'Accéléré', timeframe: '0-1 an' },
+      { title: 'Low-Code/No-Code', description: 'Développement accéléré', impact: 'Medium', adoption: 'Croissant', timeframe: '1-2 ans' },
     ];
   }
 
-  private async getNews(sector: string, country: string): Promise<NewsItem[]> {
+  public async getNews(sector: string, country: string): Promise<NewsItem[]> {
     const economic = await this.getEconomicData(country);
     return [
-      { title: `Le secteur ${sector} en pleine croissance en Afrique de l'Ouest`, date: new Date().toLocaleDateString(), summary: `Investissements record de 100Mâ‚¬ dans le ${sector} cette annÃ©e, croissance de 28% attendue`, source: 'EcoActu', category: 'Ã‰conomie' },
-      { title: `Nouvelle rÃ©glementation favorisant l'innovation`, date: new Date().toLocaleDateString(), summary: 'Le gouvernement annonce des mesures de soutien aux startups tech', source: 'Financial Afrik', category: 'RÃ©glementation' },
-      { title: `${country} accÃ©lÃ¨re sa transformation digitale`, date: new Date().toLocaleDateString(), summary: `Taux de pÃ©nÃ©tration Mobile Money Ã  ${economic.mobileMoneyPenetration}`, source: 'Jeune Afrique', category: 'Digital' },
+      { title: `Le secteur ${sector} en pleine croissance en Afrique de l'Ouest`, date: new Date().toLocaleDateString(), summary: `Investissements record de 100M€ dans le ${sector} cette année, croissance de 28% attendue`, source: 'EcoActu', category: 'Économie' },
+      { title: `Nouvelle réglementation favorisant l'innovation`, date: new Date().toLocaleDateString(), summary: 'Le gouvernement annonce des mesures de soutien aux startups tech', source: 'Financial Afrik', category: 'Réglementation' },
+      { title: `${country} accélère sa transformation digitale`, date: new Date().toLocaleDateString(), summary: `Taux de pénétration Mobile Money à ${economic.mobileMoneyPenetration}`, source: 'Jeune Afrique', category: 'Digital' },
       { title: `Le secteur ${sector} attire les investisseurs`, date: new Date().toLocaleDateString(), summary: 'Tour de table record pour une startup locale', source: 'TechCabal', category: 'Financement' },
     ];
   }
