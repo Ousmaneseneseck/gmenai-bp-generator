@@ -1,4 +1,4 @@
-﻿// app/page.tsx
+﻿// app/page.tsx (version corrigée avec section Ressources)
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -64,7 +64,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative">
+    <main>
       <Header onSignupClick={() => setIsSignupOpen(true)} />
       <Hero onSignupClick={() => setShowGenerator(true)} />
       <ModulesGrid />
@@ -88,30 +88,32 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm">
-              <div className="text-3xl mb-3">📘</div>
+            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-4xl mb-3">📘</div>
               <h3 className="text-xl font-semibold mb-2">Guide du business plan</h3>
               <p className="text-gray-600 dark:text-gray-400">Créez un business plan bancable</p>
+              <span className="inline-block mt-3 text-primary text-sm">À venir →</span>
             </div>
             
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm">
-              <div className="text-3xl mb-3">📊</div>
+            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-4xl mb-3">📊</div>
               <h3 className="text-xl font-semibold mb-2">Template Excel</h3>
               <p className="text-gray-600 dark:text-gray-400">Prévisions financières en FCFA</p>
+              <span className="inline-block mt-3 text-primary text-sm">À venir →</span>
             </div>
             
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm">
-              <div className="text-3xl mb-3">🎬</div>
+            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div className="text-4xl mb-3">🎬</div>
               <h3 className="text-xl font-semibold mb-2">Tutoriels vidéo</h3>
               <p className="text-gray-600 dark:text-gray-400">Tutos pas à pas</p>
+              <span className="inline-block mt-3 text-primary text-sm">À venir →</span>
             </div>
           </div>
         </div>
       </section>
-
-<Footer onSignupClick={() => setIsSignupOpen(true)} isSignupOpen={isSignupOpen} setIsSignupOpen={setIsSignupOpen} />
+      
+      <Footer onSignupClick={() => setIsSignupOpen(true)} isSignupOpen={isSignupOpen} setIsSignupOpen={setIsSignupOpen} />
       <SearchAssistant onDataEnriched={handleDataEnriched} />
     </main>
   );
 }
-

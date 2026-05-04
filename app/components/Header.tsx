@@ -111,3 +111,4 @@ export default function Header({ onSignupClick }: HeaderProps) {
     </header>
   );
 }
+
