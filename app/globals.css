@@ -93,3 +93,26 @@ img[loading="lazy"] {
 .layout-contain {
   contain: layout;
 }
+
+/* Styles améliorés pour la landing page */
+.btn-primary {
+  @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold transition-all hover:bg-primary/90 hover:scale-105;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
