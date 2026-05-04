@@ -12,6 +12,19 @@ interface HeaderProps {
 export default function Header({ onSignupClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(() => {
+    // Gérer le scroll vers la section Ressources
+    const hash = window.location.hash;
+    if (hash === '#ressources') {
+      const element = document.getElementById('ressources');
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
+
   const navItems = [
     { label: 'FonctionnalitÃ©s', href: '#modules' },
     { label: 'Comment Ã§a marche', href: '#how-it-works' },
@@ -111,5 +124,7 @@ export default function Header({ onSignupClick }: HeaderProps) {
     </header>
   );
 }
+
+
 
 
