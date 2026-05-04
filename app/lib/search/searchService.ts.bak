@@ -1,6 +1,4 @@
-﻿import { cache } from '@/app/lib/cache';
-
-// app/lib/search/searchService.ts
+﻿// app/lib/search/searchService.ts
 export interface EnrichedData {
   marketData: any;
   economicData: any;
@@ -15,23 +13,19 @@ export interface EnrichedData {
 }
 
 class SearchService {
-    async enrichBusinessPlan(sector: string, country: string): Promise<EnrichedData> {
-    const cacheKey = `enrich-${sector}-${country}`;
-    return await cache.get(cacheKey, async () => {
-      return {
-        marketData: await this.getMarketData(sector, country),
-        economicData: await this.getEconomicData(country),
-        competitors: await this.getCompetitors(sector, country),
-        opportunities: await this.getOpportunities(sector, country),
-        regulations: await this.getRegulations(sector, country),
-        benchmark: await this.getSectorBenchmark(sector),
-        news: await this.getNews(sector, country),
-        financialRatios: await this.getFinancialRatios(sector),
-        swotAnalysis: await this.getSWOTAnalysis(sector, country),
-        trends: await this.getTrends(sector, country),
-      };
-    }, 3600000); // Cache 1 heure
-  };
+  async enrichBusinessPlan(sector: string, country: string): Promise<EnrichedData> {
+    return {
+      marketData: await this.getMarketData(sector, country),
+      economicData: await this.getEconomicData(country),
+      competitors: await this.getCompetitors(sector, country),
+      opportunities: await this.getOpportunities(sector, country),
+      regulations: await this.getRegulations(sector, country),
+      benchmark: await this.getSectorBenchmark(sector),
+      news: await this.getNews(sector, country),
+      financialRatios: await this.getFinancialRatios(sector),
+      swotAnalysis: await this.getSWOTAnalysis(sector, country),
+      trends: await this.getTrends(sector, country),
+    };
   }
 
   async getMarketData(sector: string, country: string): Promise<any> {
@@ -260,4 +254,3 @@ class SearchService {
 }
 
 export const searchService = new SearchService();
-

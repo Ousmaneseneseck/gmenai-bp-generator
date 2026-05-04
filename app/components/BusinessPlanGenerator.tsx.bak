@@ -3,13 +3,7 @@
 
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import dynamic from 'next/dynamic';
-
-const BusinessPlanResult = dynamic(() => import('./BusinessPlanResult'), {
-  loading: () => <div className="text-center py-8">Chargement du résultat...</div>,
-  ssr: false,
-});
-
+import BusinessPlanResult from './BusinessPlanResult';
 import SearchAssistant from './SearchAssistant';
 
 interface FormData {
@@ -238,4 +232,3 @@ export default function BusinessPlanGenerator() {
     </div>
   );
 }
-
