@@ -1,4 +1,4 @@
-Ôªø// app/financial-reports/page.tsx
+// app/financial-reports/page.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -15,7 +15,7 @@ export default function FinancialReportsPage() {
   const [companyName, setCompanyName] = useState('Votre entreprise');
   const [activeTab, setActiveTab] = useState<'income' | 'cashflow' | 'capex' | 'scenarios'>('income');
 
-  // Donn√©es pour les graphiques
+  // DonnÈes pour les graphiques
   const revenueData = [
     { year: 'N+1', revenue: 100, expenses: 150, profit: -50 },
     { year: 'N+2', revenue: 250, expenses: 200, profit: 50 },
@@ -26,21 +26,21 @@ export default function FinancialReportsPage() {
 
   const cashflowData = [
     { month: 'Jan', encaissements: 8, decaissements: 12, solde: -4 },
-    { month: 'F√©v', encaissements: 10, decaissements: 12, solde: -2 },
+    { month: 'FÈv', encaissements: 10, decaissements: 12, solde: -2 },
     { month: 'Mar', encaissements: 12, decaissements: 13, solde: -1 },
     { month: 'Avr', encaissements: 15, decaissements: 13, solde: 2 },
     { month: 'Mai', encaissements: 18, decaissements: 14, solde: 4 },
     { month: 'Juin', encaissements: 22, decaissements: 15, solde: 7 },
     { month: 'Juil', encaissements: 25, decaissements: 16, solde: 9 },
-    { month: 'Ao√ª', encaissements: 28, decaissements: 17, solde: 11 },
+    { month: 'Ao˚', encaissements: 28, decaissements: 17, solde: 11 },
     { month: 'Sep', encaissements: 32, decaissements: 18, solde: 14 },
     { month: 'Oct', encaissements: 38, decaissements: 20, solde: 18 },
     { month: 'Nov', encaissements: 45, decaissements: 22, solde: 23 },
-    { month: 'D√©c', encaissements: 55, decaissements: 25, solde: 30 },
+    { month: 'DÈc', encaissements: 55, decaissements: 25, solde: 30 },
   ];
 
   const capexData = [
-    { category: 'D√©veloppement', amount: 35, color: '#0A66C2' },
+    { category: 'DÈveloppement', amount: 35, color: '#0A66C2' },
     { category: 'Marketing', amount: 25, color: '#10B981' },
     { category: 'Commercial', amount: 20, color: '#F59E0B' },
     { category: 'Infrastructure', amount: 15, color: '#8B5CF6' },
@@ -49,15 +49,15 @@ export default function FinancialReportsPage() {
 
   const opexData = [
     { category: 'Salaires', amount: 45, color: '#0A66C2' },
-    { category: 'H√©bergement', amount: 12, color: '#10B981' },
+    { category: 'HÈbergement', amount: 12, color: '#10B981' },
     { category: 'Licences', amount: 8, color: '#F59E0B' },
     { category: 'Support', amount: 8, color: '#8B5CF6' },
-    { category: 'Frais g√©n√©raux', amount: 7, color: '#EC4899' },
+    { category: 'Frais gÈnÈraux', amount: 7, color: '#EC4899' },
   ];
 
   const scenariosData = [
     { name: 'Pessimiste', value: 40, color: '#EF4444' },
-    { name: 'R√©aliste', value: 27, color: '#F59E0B' },
+    { name: 'RÈaliste', value: 27, color: '#F59E0B' },
     { name: 'Optimiste', value: 13, color: '#10B981' },
   ];
 
@@ -77,10 +77,10 @@ export default function FinancialReportsPage() {
 
   // Fonction de retour vers le business plan
   const handleGoBack = () => {
-    // V√©rifier si nous avons un business plan stock√©
+    // VÈrifier si nous avons un business plan stockÈ
     const storedBP = sessionStorage.getItem('currentBusinessPlan');
     if (storedBP) {
-      // Rediriger vers la page d'accueil avec un param√®tre pour afficher le r√©sultat
+      // Rediriger vers la page d'accueil avec un paramËtre pour afficher le rÈsultat
       router.push('/?showResult=true');
     } else {
       router.back();
@@ -109,7 +109,7 @@ export default function FinancialReportsPage() {
           onClick={handleDownloadPDF}
           className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-primary/90 transition-all flex items-center gap-2"
         >
-          <Download size={18} /> T√©l√©charger PDF
+          <Download size={18} /> TÈlÈcharger PDF
         </button>
         <button
           onClick={handlePrint}
@@ -121,23 +121,23 @@ export default function FinancialReportsPage() {
 
       <div className="container mx-auto max-w-6xl py-8 px-4 print:py-0">
         
-        {/* En-t√™te */}
+        {/* En-tÍte */}
         <div className="bg-gradient-to-r from-primary to-primary/70 text-white p-8 rounded-t-xl print:bg-primary mb-6">
           <h1 className="text-3xl font-bold mb-2">{companyName}</h1>
           <p className="text-xl opacity-90">Rapports Financiers & Projections</p>
-          <p className="text-sm opacity-75 mt-2">G√©n√©r√© par GMENAI IA - {new Date().toLocaleDateString('fr-FR')}</p>
+          <p className="text-sm opacity-75 mt-2">GÈnÈrÈ par GMENAI IA - {new Date().toLocaleDateString('fr-FR')}</p>
           <div className="mt-4 inline-block px-4 py-2 bg-white/20 rounded-lg">
-            <span className="font-semibold">üí∞ Devise : FCFA</span>
+            <span className="font-semibold">?? Devise : FCFA</span>
           </div>
         </div>
 
         {/* Navigation des onglets */}
         <div className="flex flex-wrap gap-2 mb-6 print:hidden">
           {[
-            { id: 'income', label: 'üìä Compte de r√©sultat', icon: TrendingUp },
-            { id: 'cashflow', label: 'üíµ Plan de tr√©sorerie', icon: DollarSign },
-            { id: 'capex', label: 'üèóÔ∏è CAPEX/OPEX', icon: PieChartIcon },
-            { id: 'scenarios', label: 'üéØ Sc√©narios', icon: TrendingDown },
+            { id: 'income', label: '?? Compte de rÈsultat', icon: TrendingUp },
+            { id: 'cashflow', label: '?? Plan de trÈsorerie', icon: DollarSign },
+            { id: 'capex', label: '??? CAPEX/OPEX', icon: PieChartIcon },
+            { id: 'scenarios', label: '?? ScÈnarios', icon: TrendingDown },
           ].map(tab => (
             <button
               key={tab.id}
@@ -154,15 +154,15 @@ export default function FinancialReportsPage() {
           ))}
         </div>
 
-        {/* Contenu des onglets - identique √† avant */}
+        {/* Contenu des onglets - identique ‡ avant */}
         <div className="space-y-6">
           
-          {/* 1. COMPTE DE R√âSULTAT */}
+          {/* 1. COMPTE DE R…SULTAT */}
           {activeTab === 'income' && (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <TrendingUp className="text-primary" />
-                Compte de r√©sultat pr√©visionnel 5 ans
+                Compte de rÈsultat prÈvisionnel 5 ans
               </h2>
               
               <div className="mb-8 h-80">
@@ -175,7 +175,7 @@ export default function FinancialReportsPage() {
                     <Legend />
                     <Bar dataKey="revenue" name="Chiffre d'affaires" fill="#0A66C2" />
                     <Bar dataKey="expenses" name="Charges" fill="#F59E0B" />
-                    <Bar dataKey="profit" name="R√©sultat" fill="#10B981" />
+                    <Bar dataKey="profit" name="RÈsultat" fill="#10B981" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -226,7 +226,7 @@ export default function FinancialReportsPage() {
                       <td className="p-3 text-right">40%</td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-medium">R√©sultat net</td>
+                      <td className="p-3 font-medium">RÈsultat net</td>
                       <td className="p-3 text-right text-red-600">-65M</td>
                       <td className="p-3 text-right text-green-600">+35M</td>
                       <td className="p-3 text-right text-green-600">+105M</td>
@@ -239,12 +239,12 @@ export default function FinancialReportsPage() {
             </div>
           )}
 
-          {/* 2. PLAN DE TR√âSORERIE */}
+          {/* 2. PLAN DE TR…SORERIE */}
           {activeTab === 'cashflow' && (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <DollarSign className="text-primary" />
-                Plan de tr√©sorerie - 12 mois
+                Plan de trÈsorerie - 12 mois
               </h2>
 
               <div className="mb-8 h-80">
@@ -256,7 +256,7 @@ export default function FinancialReportsPage() {
                     <Tooltip formatter={(value) => `${value}M FCFA`} />
                     <Legend />
                     <Area type="monotone" dataKey="encaissements" name="Encaissements" stroke="#0A66C2" fill="#0A66C2" fillOpacity={0.3} />
-                    <Area type="monotone" dataKey="decaissements" name="D√©caissements" stroke="#EF4444" fill="#EF4444" fillOpacity={0.3} />
+                    <Area type="monotone" dataKey="decaissements" name="DÈcaissements" stroke="#EF4444" fill="#EF4444" fillOpacity={0.3} />
                     <Line type="monotone" dataKey="solde" name="Solde" stroke="#10B981" strokeWidth={2} />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -268,9 +268,9 @@ export default function FinancialReportsPage() {
                     <tr className="bg-gray-100 dark:bg-gray-700">
                       <th className="p-2 text-left">Mois</th>
                       <th className="p-2 text-right">Encaissements</th>
-                      <th className="p-2 text-right">D√©caissements</th>
+                      <th className="p-2 text-right">DÈcaissements</th>
                       <th className="p-2 text-right">Solde mensuel</th>
-                      <th className="p-2 text-right">Tr√©sorerie cumul√©e</th>
+                      <th className="p-2 text-right">TrÈsorerie cumulÈe</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -296,10 +296,10 @@ export default function FinancialReportsPage() {
             </div>
           )}
 
-          {/* 3. CAPEX/OPEX D√âTAILL√âS */}
+          {/* 3. CAPEX/OPEX D…TAILL…S */}
           {activeTab === 'capex' && (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">üèóÔ∏è CAPEX/OPEX d√©taill√©s</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">??? CAPEX/OPEX dÈtaillÈs</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
@@ -314,7 +314,7 @@ export default function FinancialReportsPage() {
                           cx="50%"
                           cy="50%"
                           labelLine={false}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }) => `${name} ${(percent ? (percent * 100).toFixed(0) : 0)}%`}
                           outerRadius={80}
                           fill="#8884d8"
                           dataKey="amount"
@@ -352,7 +352,7 @@ export default function FinancialReportsPage() {
                           cx="50%"
                           cy="50%"
                           labelLine={false}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }) => `${name} ${(percent ? (percent * 100).toFixed(0) : 0)}%`}
                           outerRadius={80}
                           fill="#8884d8"
                           dataKey="amount"
@@ -381,15 +381,15 @@ export default function FinancialReportsPage() {
             </div>
           )}
 
-          {/* 4. SC√âNARIOS FINANCIERS */}
+          {/* 4. SC…NARIOS FINANCIERS */}
           {activeTab === 'scenarios' && (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">üéØ 3 sc√©narios financiers</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">?? 3 scÈnarios financiers</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 text-center">
-                    Sc√©narios de rentabilit√© √† 5 ans
+                    ScÈnarios de rentabilitÈ ‡ 5 ans
                   </h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
@@ -406,7 +406,7 @@ export default function FinancialReportsPage() {
                         <Tooltip formatter={(value) => `${value}M FCFA`} />
                         <Legend />
                         <Bar dataKey="pessimistic" name="Pessimiste" fill="#EF4444" />
-                        <Bar dataKey="realistic" name="R√©aliste" fill="#F59E0B" />
+                        <Bar dataKey="realistic" name="RÈaliste" fill="#F59E0B" />
                         <Bar dataKey="optimistic" name="Optimiste" fill="#10B981" />
                       </BarChart>
                     </ResponsiveContainer>
@@ -415,7 +415,7 @@ export default function FinancialReportsPage() {
 
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3 text-center">
-                    CAPEX selon sc√©narios
+                    CAPEX selon scÈnarios
                   </h3>
                   <div className="h-64">
                     <ResponsiveContainer width="100%" height="100%">
@@ -425,7 +425,7 @@ export default function FinancialReportsPage() {
                           cx="50%"
                           cy="50%"
                           labelLine={true}
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          label={({ name, percent }) => `${name} ${(percent ? (percent * 100).toFixed(0) : 0)}%`}
                           outerRadius={80}
                           fill="#8884d8"
                           dataKey="value"
@@ -450,7 +450,7 @@ export default function FinancialReportsPage() {
               </div>
 
               <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">üìä Indicateurs cl√©s de suivi</h3>
+                <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">?? Indicateurs clÈs de suivi</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {kpiData.map((kpi, i) => (
                     <div key={i} className="text-center p-3 bg-white dark:bg-gray-600 rounded-lg">
@@ -468,21 +468,21 @@ export default function FinancialReportsPage() {
           )}
         </div>
 
-        {/* Page suppl√©mentaire - Synth√®se */}
+        {/* Page supplÈmentaire - SynthËse */}
         <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 print:shadow-none print:break-inside-avoid">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">üìà Synth√®se financi√®re</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">?? SynthËse financiËre</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <p className="text-sm text-gray-500">üí∞ Besoin de financement initial</p>
+              <p className="text-sm text-gray-500">?? Besoin de financement initial</p>
               <p className="text-2xl font-bold text-primary">100M FCFA</p>
             </div>
             <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-              <p className="text-sm text-gray-500">üéØ Seuil de rentabilit√©</p>
+              <p className="text-sm text-gray-500">?? Seuil de rentabilitÈ</p>
               <p className="text-2xl font-bold text-green-600">18 mois</p>
             </div>
             <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-              <p className="text-sm text-gray-500">üìä ROI projet√© √† 5 ans</p>
+              <p className="text-sm text-gray-500">?? ROI projetÈ ‡ 5 ans</p>
               <p className="text-2xl font-bold text-primary">320%</p>
             </div>
           </div>
@@ -504,8 +504,8 @@ export default function FinancialReportsPage() {
 
         {/* Pied de page */}
         <div className="mt-6 text-center text-sm text-gray-500 print:mt-4">
-          <p>Document confidentiel g√©n√©r√© par GMENAI IA - {new Date().toLocaleDateString('fr-FR')}</p>
-          <p className="text-xs">üìä Pr√©visions en FCFA - Adapt√© aux march√©s africains - Int√©grations Mobile Money</p>
+          <p>Document confidentiel gÈnÈrÈ par GMENAI IA - {new Date().toLocaleDateString('fr-FR')}</p>
+          <p className="text-xs">?? PrÈvisions en FCFA - AdaptÈ aux marchÈs africains - IntÈgrations Mobile Money</p>
         </div>
       </div>
     </div>
