@@ -10,7 +10,12 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96],
     minimumCacheTTL: 86400,
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   
   // Minification
@@ -20,6 +25,16 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   generateEtags: false,
+  
+  // Optimisations supplémentaires
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', 'recharts'],
+  },
+  
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   
   // Headers de cache
   async headers() {
@@ -34,11 +49,11 @@ const nextConfig = {
         ],
       },
       {
-        source: '/api/(.*)',
+        source: '/images/(.*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate',
+            value: 'public, max-age=86400, stale-while-revalidate=604800',
           },
         ],
       },

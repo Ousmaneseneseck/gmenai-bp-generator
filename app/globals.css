@@ -1,29 +1,46 @@
-﻿@import "tailwindcss";
+﻿/* app/globals.css - Version optimisée */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Définit les couleurs et thèmes à la manière de Tailwind v4 */
-@theme {
-  --color-primary: #0A66C2;
-  --color-secondary: #10B981;
-  --color-accent: #F59E0B;
-}
-
-/* Styles de base appliqués avec @layer */
-@layer base {
-  body {
-    background-color: white;
-    color: #111827;
-  }
-  .dark body {
-    background-color: #111827;
-    color: #f3f4f6;
+/* Réduire les animations pour les utilisateurs qui préfèrent moins de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-/* Votre animation personnalisée */
+/* Contenu critique inline */
+.critical-content {
+  display: block;
+}
+
+/* Lazy loading images */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Conteneur avec contenance pour améliorer les performances */
+.card-container {
+  contain: layout style paint;
+}
+
+/* Optimisation des polices */
+.font-optimized {
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+}
+
+/* Animation fadeIn optimisée */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -32,56 +49,47 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}/* Styles existants + styles d'impression */
+  animation: fadeIn 0.3s ease-out forwards;
+}
 
-@media print {
-  .print\:hidden {
-    display: none !important;
+/* Squelette de chargement */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
   }
-  
-  .print\:shadow-none {
-    box-shadow: none !important;
-  }
-  
-  .print\:bg-primary {
-    background-color: #0A66C2 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  
-  body {
-    background: white !important;
-  }
-  
-  .container {
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-  
-  button, .fixed {
-    display: none !important;
-  }
-  
-  .bg-primary {
-    background-color: #0A66C2 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  
-  .text-primary {
-    color: #0A66C2 !important;
-  }
-  
-  .border {
-    border-color: #e5e7eb !important;
+  100% {
+    background-position: -200% 0;
   }
 }
 
-/* Styles d'impression pour le PDF */
-@media print and (color) {
-  * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+/* Dark mode skeleton */
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    #2d2d2d 25%,
+    #3d3d3d 50%,
+    #2d2d2d 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* Performance: will-change pour les animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Contenir les coûts de layout */
+.layout-contain {
+  contain: layout;
 }
