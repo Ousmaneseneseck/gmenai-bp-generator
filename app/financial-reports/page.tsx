@@ -19,7 +19,7 @@ export default function FinancialReportsPage() {
 
   useEffect(() => { const stored = sessionStorage.getItem('companyName'); if (stored) setCompanyName(stored); }, []);
   const handlePrint = () => window.print();
-  const handleBack = () => router.push('/');
+  const handleBack = () => router.push('/generated-business-plan');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -47,3 +47,4 @@ export default function FinancialReportsPage() {
     </div>
   );
 }
+
