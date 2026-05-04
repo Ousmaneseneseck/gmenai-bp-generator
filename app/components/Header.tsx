@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { Menu, X, LogIn } from 'lucide-react';
@@ -13,10 +13,10 @@ export default function Header({ onSignupClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: 'Fonctionnalités', href: '#modules' },
-    { label: 'Comment ça marche', href: '#how-it-works' },
+    { label: 'FonctionnalitÃ©s', href: '#modules' },
+    { label: 'Comment Ã§a marche', href: '#how-it-works' },
     { label: 'Tarifs', href: '#pricing' },
-    { label: 'Ressources', href: '#resources' },
+    { label: 'Ressources', href: '/ressources' },
   ];
 
   return (

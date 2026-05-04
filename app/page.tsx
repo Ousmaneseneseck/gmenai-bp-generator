@@ -74,8 +74,44 @@ export default function Home() {
       <Pricing />
       <Testimonials />
       <Faq />
-      <Footer onSignupClick={() => setIsSignupOpen(true)} isSignupOpen={isSignupOpen} setIsSignupOpen={setIsSignupOpen} />
+      
+      {/* Section Ressources */}
+      <section id="resources" className="py-20 px-4 bg-gray-50 dark:bg-gray-800">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Ressources GMENAI
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Guides, templates et outils pour réussir votre business plan
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm">
+              <div className="text-3xl mb-3">📘</div>
+              <h3 className="text-xl font-semibold mb-2">Guide du business plan</h3>
+              <p className="text-gray-600 dark:text-gray-400">Créez un business plan bancable</p>
+            </div>
+            
+            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm">
+              <div className="text-3xl mb-3">📊</div>
+              <h3 className="text-xl font-semibold mb-2">Template Excel</h3>
+              <p className="text-gray-600 dark:text-gray-400">Prévisions financières en FCFA</p>
+            </div>
+            
+            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-sm">
+              <div className="text-3xl mb-3">🎬</div>
+              <h3 className="text-xl font-semibold mb-2">Tutoriels vidéo</h3>
+              <p className="text-gray-600 dark:text-gray-400">Tutos pas à pas</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<Footer onSignupClick={() => setIsSignupOpen(true)} isSignupOpen={isSignupOpen} setIsSignupOpen={setIsSignupOpen} />
       <SearchAssistant onDataEnriched={handleDataEnriched} />
     </main>
   );
 }
+

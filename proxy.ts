@@ -1,18 +1,13 @@
-﻿// middleware.ts
+﻿// proxy.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-interface RateLimitEntry {
-  count: number;
-  resetTime: number;
-}
+const rateLimit = new Map<string, { count: number; resetTime: number }>();
 
-const rateLimit = new Map<string, RateLimitEntry>();
-
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const ip = request.ip || request.headers.get('x-forwarded-for') || 'anonymous';
   const now = Date.now();
-  const windowMs = 60 * 1000; // 1 minute
+  const windowMs = 60 * 1000;
   const maxRequests = 30;
 
   let entry = rateLimit.get(ip);
@@ -34,13 +29,5 @@ export function middleware(request: NextRequest) {
     });
   }
 
-  // Ajouter des headers de cache
-  const response = NextResponse.next();
-  response.headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
-  
-  return response;
+  return NextResponse.next();
 }
-
-export const config = {
-  matcher: '/api/:path*',
-};
