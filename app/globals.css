@@ -1,46 +1,65 @@
-﻿/* app/globals.css - Version optimisée */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+﻿@import "tailwindcss";
 
-/* Réduire les animations pour les utilisateurs qui préfèrent moins de mouvement */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+/* Définition des couleurs personnalisées */
+@theme {
+  --color-primary: #0A66C2;
+  --color-secondary: #10B981;
+  --color-accent: #F59E0B;
+}
+
+/* Styles de base */
+@layer base {
+  body {
+    background-color: white;
+    color: #111827;
+  }
+  .dark body {
+    background-color: #111827;
+    color: #f3f4f6;
   }
 }
 
-/* Contenu critique inline */
-.critical-content {
-  display: block;
+/* Classes personnalisées (sans @apply pour éviter les erreurs) */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
-/* Lazy loading images */
-img[loading="lazy"] {
-  content-visibility: auto;
+.btn-primary:hover {
+  background-color: #0854a3;
+  transform: scale(1.05);
 }
 
-/* Conteneur avec contenance pour améliorer les performances */
-.card-container {
-  contain: layout style paint;
+.card-hover {
+  transition-property: all;
+  transition-duration: 300ms;
 }
 
-/* Optimisation des polices */
-.font-optimized {
-  font-display: swap;
-  text-rendering: optimizeLegibility;
+.card-hover:hover {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  transform: translateY(-4px);
 }
 
-/* Animation fadeIn optimisée */
+.gradient-text {
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -48,69 +67,13 @@ img[loading="lazy"] {
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-/* Squelette de chargement */
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 25%,
-    #e0e0e0 50%,
-    #f0f0f0 75%
-  );
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* Dark mode skeleton */
-.dark .skeleton {
-  background: linear-gradient(
-    90deg,
-    #2d2d2d 25%,
-    #3d3d3d 50%,
-    #2d2d2d 75%
-  );
-  background-size: 200% 100%;
-}
-
-/* Performance: will-change pour les animations */
-.will-change-transform {
-  will-change: transform;
-}
-
-/* Contenir les coûts de layout */
-.layout-contain {
-  contain: layout;
-}
-
-/* Styles améliorés pour la landing page */
-.btn-primary {
-  @apply bg-primary text-white px-6 py-3 rounded-lg font-semibold transition-all hover:bg-primary/90 hover:scale-105;
-}
-
-.card-hover {
-  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
-}
-
-.gradient-text {
-  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
-}
-
-/* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
 .animate-float {
