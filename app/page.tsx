@@ -24,29 +24,30 @@ export default function Home() {
       <Header onSignupClick={() => setIsSignupOpen(true)} />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-blue-50 via-white to-emerald-50">
+            {/* Hero Section - Version mobile optimisée */}
+      <section className="pt-24 md:pt-32 pb-12 md:pb-20 px-4 bg-gradient-to-br from-blue-50 via-white to-emerald-50">
         <div className="container mx-auto max-w-6xl text-center">
-          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 px-3 md:px-4 py-1 md:py-2 rounded-full mb-4 md:mb-6 text-sm md:text-base">
             ✨ Nouveau : Assistant IA intégré
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
             Générez un business plan bancable
-            <span className="text-primary"> en moins de 10 minutes</span>
+            <span className="text-primary block mt-1"> en moins de 10 minutes</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-gray-700 mb-6 md:mb-8 max-w-3xl mx-auto px-2">
             8 modules IA, prévisions financières en FCFA, intégration Mobile Money.
             Le business plan que les investisseurs et banques africaines attendent.
           </p>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105 shadow-lg"
+            className="bg-primary text-white px-6 md:px-8 py-2 md:py-3 rounded-lg text-base md:text-lg font-semibold hover:bg-primary/90 transition-all transform hover:scale-105 shadow-lg"
           >
             🚀 Démarrer mon business plan
           </button>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto mt-12 pt-8 border-t border-gray-200">
-            <div><div className="text-3xl font-bold text-primary">2000+</div><div className="text-sm text-gray-500">Entrepreneurs</div></div>
-            <div><div className="text-3xl font-bold text-primary">50M+</div><div className="text-sm text-gray-500">FCFA levés</div></div>
-            <div><div className="text-3xl font-bold text-primary">8</div><div className="text-sm text-gray-500">Modules IA</div></div>
+          <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mt-8 md:mt-12 pt-6 md:pt-8 border-t border-gray-200">
+            <div><div className="text-xl md:text-3xl font-bold text-primary">2000+</div><div className="text-xs md:text-sm text-gray-600">Entrepreneurs</div></div>
+            <div><div className="text-xl md:text-3xl font-bold text-primary">50M+</div><div className="text-xs md:text-sm text-gray-600">FCFA levés</div></div>
+            <div><div className="text-xl md:text-3xl font-bold text-primary">8</div><div className="text-xs md:text-sm text-gray-600">Modules IA</div></div>
           </div>
         </div>
       </section>
@@ -119,3 +120,4 @@ export default function Home() {
     </main>
   );
 }
+

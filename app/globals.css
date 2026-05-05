@@ -1,81 +1,129 @@
-﻿@import "tailwindcss";
+﻿/* app/globals.css - Version corrigée pour mobile */
+@import "tailwindcss";
 
-/* Définition des couleurs personnalisées */
 @theme {
   --color-primary: #0A66C2;
   --color-secondary: #10B981;
   --color-accent: #F59E0B;
 }
 
-/* Styles de base */
 @layer base {
   body {
-    background-color: white;
-    color: #111827;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-size: 16px;
+    line-height: 1.5;
   }
+  
   .dark body {
     background-color: #111827;
-    color: #f3f4f6;
+    color: #e5e7eb;
   }
 }
 
-/* Classes personnalisées (sans @apply pour éviter les erreurs) */
-.btn-primary {
-  background-color: var(--color-primary);
-  color: white;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.btn-primary:hover {
-  background-color: #0854a3;
-  transform: scale(1.05);
-}
-
-.card-hover {
-  transition-property: all;
-  transition-duration: 300ms;
-}
-
-.card-hover:hover {
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  transform: translateY(-4px);
-}
-
-.gradient-text {
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-  background-clip: text;
-  color: transparent;
-}
-
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@layer components {
+  /* Amélioration de la lisibilité sur mobile */
+  .text-readable {
+    color: #1a1a1a !important;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .dark .text-readable {
+    color: #e5e7eb !important;
+  }
+  
+  /* Contraste amélioré pour les cartes */
+  .card-content {
+    color: #374151;
+  }
+  
+  .dark .card-content {
+    color: #d1d5db;
+  }
+  
+  /* Titres toujours lisibles */
+  h1, h2, h3, h4, h5, h6 {
+    color: #111827;
+  }
+  
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #ffffff;
+  }
+  
+  /* Paragraphes */
+  p, li, .paragraph {
+    color: #4b5563;
+  }
+  
+  .dark p, .dark li, .dark .paragraph {
+    color: #9ca3af;
   }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Styles pour mobile */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+/* Styles responsifs pour cartes et sections */
+@media (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stats-container {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .nav-menu {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* Améliorer l'espacement */
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  /* Ajuster les tailles de police */
+  h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .module-card {
+    padding: 1rem !important;
+  }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+/* Améliorer le contraste des textes */
+.text-gray-600 {
+  color: #4b5563 !important;
+}
+
+.dark .text-gray-600 {
+  color: #9ca3af !important;
+}
+
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: #1f2937 !important;
 }
