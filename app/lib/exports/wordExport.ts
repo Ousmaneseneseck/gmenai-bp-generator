@@ -1,8 +1,9 @@
 ﻿// app/lib/exports/wordExport.ts
-import { Document, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType } from "docx";
+import { Document, Paragraph, TextRun, HeadingLevel } from "docx";
 import { saveAs } from "file-saver";
 
 export async function exportToWord(businessPlanData: any, companyName: string) {
+  // Créer le document
   const doc = new Document({
     sections: [{
       properties: {},
@@ -16,45 +17,44 @@ export async function exportToWord(businessPlanData: any, companyName: string) {
           text: `Business Plan - ${new Date().toLocaleDateString()}`,
           spacing: { after: 400 },
         }),
-
+        
         // Résumé exécutif
         new Paragraph({
-          text: "📋 Résumé exécutif",
+          text: "Résumé exécutif",
           heading: HeadingLevel.HEADING_1,
           spacing: { before: 200, after: 200 },
         }),
         new Paragraph({
           children: [
+            new TextRun("Votre business plan complet généré par IA. "),
             new TextRun({
-              text: "Votre business plan complet généré par IA",
+              text: "Prévisions financières sur 5 ans.",
               italics: true,
             }),
           ],
         }),
-
+        
         // Étude de marché
         new Paragraph({
-          text: "📊 Étude de marché",
+          text: "Étude de marché",
           heading: HeadingLevel.HEADING_1,
           spacing: { before: 200, after: 200 },
         }),
-        new Paragraph(`📈 Taille du marché: ${businessPlanData.marketSize || "850M FCFA"}`),
-        new Paragraph(`📈 Croissance annuelle: ${businessPlanData.marketGrowth || "28%"}`),
-        new Paragraph(`🎯 Opportunités: Digitalisation, Mobile Money, Marché inexploité`),
-
+        new Paragraph(`Taille du marché: ${businessPlanData.marketSize || "850M FCFA"}`),
+        new Paragraph(`Croissance annuelle: ${businessPlanData.marketGrowth || "28%"}`),
+        
         // Modèle de revenus
         new Paragraph({
-          text: "💰 Modèle de revenus",
+          text: "Modèle de revenus",
           heading: HeadingLevel.HEADING_1,
           spacing: { before: 200, after: 200 },
         }),
         new Paragraph(`Pricing: ${businessPlanData.pricing || "49 500 FCFA/mois"}`),
-        new Paragraph(`ARR projeté: ${businessPlanData.arr || "250M FCFA"}`),
-        new Paragraph(`MRR projeté: ${businessPlanData.mrr || "25M FCFA"}`),
-
-        // Projections financières
+        new Paragraph(`ARR: ${businessPlanData.arr || "250M FCFA"} | MRR: ${businessPlanData.mrr || "25M FCFA"}`),
+        
+        // Projections
         new Paragraph({
-          text: "📈 Projections financières 5 ans",
+          text: "Projections financières",
           heading: HeadingLevel.HEADING_1,
           spacing: { before: 200, after: 200 },
         }),
@@ -67,6 +67,7 @@ export async function exportToWord(businessPlanData: any, companyName: string) {
     }],
   });
 
+  // Générer et télécharger
   const blob = await doc.save();
   saveAs(blob, `${companyName}-Business-Plan.docx`);
 }
