@@ -40,11 +40,11 @@ export default function GeneratedBusinessPlan() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
+            <div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
         <button onClick={handleBack} className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><ArrowLeft size={18} /> Retour</button>
+        <button onClick={handleFinancialReports} className="bg-secondary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><LineChart size={18} /> Rapports financiers</button>
         <button onClick={handlePrint} className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><Download size={18} /> PDF</button>
         <button onClick={handlePrint} className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><Printer size={18} /> Imprimer</button>
-        <button onClick={handleFinancialReports} className="bg-secondary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><LineChart size={18} /> Rapports financiers</button>
       </div>
 
       <div className="container mx-auto max-w-5xl py-8 px-4">
@@ -81,10 +81,10 @@ export default function GeneratedBusinessPlan() {
 // Ajouter les boutons d'export multiples dans la barre d'outils
 // Remplacer les boutons existants par :
 
-<div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
-  <button onClick={handleBack} className="bg-gray-700 text-white px-3 py-2 rounded-lg shadow-lg"><ArrowLeft size={16} /> Retour</button>
-  <button onClick={() => ExportService.generateBusinessPlanPDF(formData, companyName)} className="bg-primary text-white px-3 py-2 rounded-lg shadow-lg">📄 BP Complet</button>
-  <button onClick={() => ExportService.generateExecutiveSummary(formData, companyName)} className="bg-secondary text-white px-3 py-2 rounded-lg shadow-lg">📋 Executive</button>
-  <button onClick={() => ExportService.generatePitchDeck(formData, companyName)} className="bg-purple-600 text-white px-3 py-2 rounded-lg shadow-lg">🎯 Pitch</button>
-  <button onClick={() => ExportService.generateBankDossier(formData, companyName)} className="bg-orange-600 text-white px-3 py-2 rounded-lg shadow-lg">🏦 Banque</button>
-</div>
+      <div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
+        <button onClick={handleBack} className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><ArrowLeft size={18} /> Retour</button>
+        <button onClick={handleFinancialReports} className="bg-secondary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><LineChart size={18} /> Rapports financiers</button>
+        <button onClick={handlePrint} className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><Download size={18} /> PDF</button>
+        <button onClick={handlePrint} className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><Printer size={18} /> Imprimer</button>
+      </div>
+

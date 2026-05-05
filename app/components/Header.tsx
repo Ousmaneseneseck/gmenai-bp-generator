@@ -1,7 +1,7 @@
 ﻿// app/components/Header.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -38,36 +38,22 @@ export default function Header({ onSignupClick }: HeaderProps) {
                 {item.label}
               </button>
             ))}
-            <button onClick={onSignupClick} className="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-              Connexion
-            </button>
-            <button onClick={onSignupClick} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-all hover:scale-105">
-              Essayer gratuitement
-            </button>
+            <button onClick={onSignupClick} className="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">Connexion</button>
+            <button onClick={onSignupClick} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-all hover:scale-105">Essayer gratuitement</button>
             <ThemeToggle />
           </div>
           <div className="flex items-center gap-4 md:hidden">
             <ThemeToggle />
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-700 dark:text-gray-300">
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)}>{isMenuOpen ? <X size={24} /> : <Menu size={24} />}</button>
           </div>
         </div>
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden py-4 border-t border-gray-200 dark:border-gray-800">
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-4">
-                {navItems.map((item) => (
-                  <button key={item.label} onClick={() => { scrollToSection(item.anchor); setIsMenuOpen(false); }} className="text-gray-700 dark:text-gray-300 hover:text-primary transition-colors text-left">
-                    {item.label}
-                  </button>
-                ))}
-                <button onClick={() => { onSignupClick(); setIsMenuOpen(false); }} className="text-left text-gray-700 dark:text-gray-300 hover:text-primary transition-colors">
-                  Connexion
-                </button>
-                <button onClick={() => { onSignupClick(); setIsMenuOpen(false); }} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 w-full">
-                  Essayer gratuitement
-                </button>
+                {navItems.map((item) => (<button key={item.label} onClick={() => { scrollToSection(item.anchor); setIsMenuOpen(false); }} className="text-left">{item.label}</button>))}
+                <button onClick={() => { onSignupClick(); setIsMenuOpen(false); }}>Connexion</button>
+                <button onClick={() => { onSignupClick(); setIsMenuOpen(false); }} className="bg-primary text-white px-4 py-2 rounded-lg w-full">Essayer gratuitement</button>
               </div>
             </motion.div>
           )}
