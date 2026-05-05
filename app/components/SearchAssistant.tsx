@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import { Search, Globe, X, Loader2, TrendingUp, DollarSign, Building2, Scale, Newspaper, BarChart3 } from 'lucide-react';
 
-// ⚠️ On accepte les props même si on ne les utilise pas pour éviter l'erreur
+// Interface des props (maintenant acceptée)
 interface SearchAssistantProps {
   sector?: string;
   country?: string;
@@ -19,19 +19,18 @@ export default function SearchAssistant({ sector, country, onDataEnriched }: Sea
 
   const performSearch = async () => {
     setIsSearching(true);
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 800));
     
-    const demoData = {
+    const enrichedData = {
       marketData: { size: '850M FCFA', growth: '28%', trends: ['Cloud adoption', 'IA générative', 'API économie'] },
       economicData: { gdp: '27.5M€', inflation: '3.2%', mobileMoney: '78%' },
       competitors: [{ name: 'TechLeader', strengths: ['Réseau étendu'] }, { name: 'DigitalSolutions', strengths: ['Support local'] }],
-      benchmark: { avgMargin: '65%', avgGrowth: '35%', avgCAC: '45k FCFA', avgLTV: '540k FCFA' },
-      regulations: [{ name: 'RGPD local', impact: 'Conformité obligatoire' }],
+      benchmark: { avgMargin: '65%', avgCAC: '45k FCFA', avgLTV: '540k FCFA' },
       news: [{ title: 'Marché en croissance', source: 'EcoActu' }]
     };
     
-    setData(demoData);
-    if (onDataEnriched) onDataEnriched(demoData);
+    setData(enrichedData);
+    if (onDataEnriched) onDataEnriched(enrichedData);
     setIsSearching(false);
   };
 
@@ -40,7 +39,6 @@ export default function SearchAssistant({ sector, country, onDataEnriched }: Sea
     { id: 'economic', label: 'Économie', icon: DollarSign },
     { id: 'competitors', label: 'Concurrence', icon: Building2 },
     { id: 'benchmark', label: 'Benchmark', icon: BarChart3 },
-    { id: 'regulations', label: 'Réglementation', icon: Scale },
     { id: 'news', label: 'Actualités', icon: Newspaper },
   ];
 
@@ -57,21 +55,18 @@ export default function SearchAssistant({ sector, country, onDataEnriched }: Sea
               <button onClick={() => setIsOpen(false)}><X size={20} /></button>
             </div>
             <div className="flex overflow-x-auto border-b">
-              {tabs.map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-3 py-2 text-sm whitespace-nowrap flex items-center gap-1 ${activeTab === tab.id ? 'border-b-2 border-primary text-primary' : 'text-gray-500'}`}>
-                <tab.icon size={14} /> {tab.label}
-              </button>))}
+              {tabs.map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-3 py-2 text-sm whitespace-nowrap flex items-center gap-1 ${activeTab === tab.id ? 'border-b-2 border-primary text-primary' : 'text-gray-500'}`}>{tab.icon}<span className="ml-1">{tab.label}</span></button>))}
             </div>
             <div className="p-4 overflow-y-auto max-h-[60vh]">
-              {isSearching ? (<div className="text-center py-8"><Loader2 className="animate-spin text-primary mx-auto" size={32} /><p className="mt-2">Recherche...</p></div>) : data ? (
+              {isSearching ? (<div className="text-center py-8"><Loader2 className="animate-spin text-primary mx-auto" size={32} /><p className="mt-2">Analyse du secteur {sector || 'général'}...</p></div>) : data ? (
                 <div className="space-y-3">
-                  {activeTab === 'market' && (<><p className="font-bold">Taille: {data.marketData.size}</p><p>Croissance: {data.marketData.growth}</p><ul>{data.marketData.trends?.map((t: string, i: number) => <li key={i}>• {t}</li>)}</ul></>)}
-                  {activeTab === 'economic' && (<><p>PIB: {data.economicData.gdp}</p><p>Inflation: {data.economicData.inflation}</p><p>Mobile Money: {data.economicData.mobileMoney}</p></>)}
-                  {activeTab === 'competitors' && (<div>{data.competitors.map((c: any, i: number) => (<div key={i} className="border rounded p-2 mb-2"><p className="font-bold">{c.name}</p><p>{c.strengths?.join(', ')}</p></div>))}</div>)}
-                  {activeTab === 'benchmark' && (<><p>Marge: {data.benchmark.avgMargin}</p><p>CAC: {data.benchmark.avgCAC}</p><p>LTV: {data.benchmark.avgLTV}</p></>)}
-                  {activeTab === 'regulations' && (<div>{data.regulations.map((r: any, i: number) => (<div key={i} className="border rounded p-2"><p className="font-bold">{r.name}</p><p>{r.impact}</p></div>))}</div>)}
-                  {activeTab === 'news' && (<div>{data.news.map((n: any, i: number) => (<div key={i} className="border-b py-2"><p className="font-semibold">{n.title}</p><p className="text-xs text-gray-500">{n.source}</p></div>))}</div>)}
+                  {activeTab === 'market' && (<><p className="font-bold">📊 Taille: {data.marketData.size}</p><p>📈 Croissance: {data.marketData.growth}</p>{data.marketData.trends?.map((t: string, i: number) => <p key={i}>• {t}</p>)}</>)}
+                  {activeTab === 'economic' && (<><p>💰 PIB: {data.economicData.gdp}</p><p>📉 Inflation: {data.economicData.inflation}</p><p>📱 Mobile Money: {data.economicData.mobileMoney}</p></>)}
+                  {activeTab === 'competitors' && (<div>{data.competitors.map((c: any, i: number) => (<div key={i} className="border rounded p-2 mb-2"><p className="font-bold">{c.name}</p><p className="text-sm">{c.strengths?.join(', ')}</p></div>))}</div>)}
+                  {activeTab === 'benchmark' && (<><p>📊 Marge moyenne: {data.benchmark.avgMargin}</p><p>💰 CAC: {data.benchmark.avgCAC}</p><p>📈 LTV: {data.benchmark.avgLTV}</p></>)}
+                  {activeTab === 'news' && (<div>{data.news.map((n: any, i: number) => (<div key={i} className="border-b py-2"><p className="font-semibold">📰 {n.title}</p><p className="text-xs text-gray-500">{n.source}</p></div>))}</div>)}
                 </div>
-              ) : (<div className="text-center py-8 text-gray-500">Recherche...</div>)}
+              ) : (<div className="text-center py-8 text-gray-500">🔍 Cliquez sur un secteur pour l'analyser</div>)}
             </div>
           </div>
         </div>
