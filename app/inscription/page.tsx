@@ -1,32 +1,42 @@
-﻿// app/connexion/page.tsx
+﻿// app/inscription/page.tsx
 'use client';
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function ConnexionPage() {
+export default function InscriptionPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     
-    // Version démo
-    localStorage.setItem("user", JSON.stringify({ email, name: email.split("@")[0] }));
+    localStorage.setItem("user", JSON.stringify({ email, name }));
     router.push("/dashboard");
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white py-12 px-4">
       <div className="max-w-md w-full bg-white rounded-xl shadow-xl p-8">
-        <h1 className="text-2xl font-bold text-center mb-6">Connexion</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Inscription</h1>
         
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Nom complet</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg"
+              required
+            />
+          </div>
+          
           <div>
             <label className="block text-sm font-medium mb-1">Email</label>
             <input
@@ -54,14 +64,14 @@ export default function ConnexionPage() {
             disabled={loading}
             className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary/90 transition"
           >
-            {loading ? "Connexion..." : "Se connecter"}
+            {loading ? "Inscription..." : "S'inscrire"}
           </button>
         </form>
         
         <p className="text-center text-sm text-gray-600 mt-4">
-          Pas encore de compte ?{" "}
-          <Link href="/inscription" className="text-primary hover:underline">
-            S'inscrire
+          Déjà un compte ?{" "}
+          <Link href="/connexion" className="text-primary hover:underline">
+            Se connecter
           </Link>
         </p>
       </div>
