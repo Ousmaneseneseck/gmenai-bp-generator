@@ -77,3 +77,14 @@ export default function GeneratedBusinessPlan() {
     </div>
   );
 }
+
+// Ajouter les boutons d'export multiples dans la barre d'outils
+// Remplacer les boutons existants par :
+
+<div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
+  <button onClick={handleBack} className="bg-gray-700 text-white px-3 py-2 rounded-lg shadow-lg"><ArrowLeft size={16} /> Retour</button>
+  <button onClick={() => ExportService.generateBusinessPlanPDF(formData, companyName)} className="bg-primary text-white px-3 py-2 rounded-lg shadow-lg">📄 BP Complet</button>
+  <button onClick={() => ExportService.generateExecutiveSummary(formData, companyName)} className="bg-secondary text-white px-3 py-2 rounded-lg shadow-lg">📋 Executive</button>
+  <button onClick={() => ExportService.generatePitchDeck(formData, companyName)} className="bg-purple-600 text-white px-3 py-2 rounded-lg shadow-lg">🎯 Pitch</button>
+  <button onClick={() => ExportService.generateBankDossier(formData, companyName)} className="bg-orange-600 text-white px-3 py-2 rounded-lg shadow-lg">🏦 Banque</button>
+</div>
