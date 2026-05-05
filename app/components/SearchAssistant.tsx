@@ -137,7 +137,7 @@ export default function SearchAssistant({ sector = "Technologie/SaaS", country =
                       <p>💰 CAC moyen: {data.benchmark.avgCAC}</p>
                       <p>📈 LTV moyen: {data.benchmark.avgLTV}</p>
                       <p>🔄 Churn moyen: {data.benchmark.avgChurn}</p>
-                      <p className="mt-2 text-sm text-primary">💡 Ratio LTV/CAC idéal: >3x</p>
+                      <p className="mt-2 text-sm text-primary">💡 Ratio LTV/CAC idéal: {">"}3x</p>
                     </div>
                   )}
                   
@@ -180,3 +180,4 @@ export default function SearchAssistant({ sector = "Technologie/SaaS", country =
     </>
   );
 }
+

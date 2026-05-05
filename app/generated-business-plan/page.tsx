@@ -18,14 +18,82 @@ export default function GeneratedBusinessPlan() {
   }, []);
 
   const modules = [
-    { title: 'Étude de marché', subtitle: 'Customer Intelligence', icon: TrendingUp, content: { size: '850M FCFA', growth: '28%', competitors: ['Concurrent A', 'Concurrent B'], opportunities: ['Digitalisation', 'Mobile Money'] } },
-    { title: 'Proposition de valeur', subtitle: 'Value Generator AI', icon: Target, content: { uniqueValue: `Simplifiez la gestion de ${formData.sector || 'votre secteur'} avec ${companyName}`, benefits: ['Gain de temps', 'Réduction des coûts', 'Meilleure visibilité'] } },
-    { title: 'Go-to-market', subtitle: 'Go-To-Market AI', icon: Rocket, content: { channels: ['Social Media', 'Partenaires locaux', 'Mobile Money'], budget: '40M FCFA', timeline: '3 mois' } },
-    { title: 'Modèle de revenus', subtitle: 'Revenue Intelligence', icon: DollarSign, content: { pricing: '49 500 FCFA/mois', arr: '250M FCFA', mrr: '25M FCFA' } },
-    { title: 'Organisation & RH', subtitle: 'Resource Optimizer', icon: Users, content: { structure: ['Direction', 'Commercial', 'Tech', 'Support'], payroll: '80M FCFA/an' } },
-    { title: 'Process & opérations', subtitle: 'Operations AI', icon: Settings, content: { workflows: ['Onboarding', 'Support', 'Facturation'], kpis: ['SLA < 2h', 'Satisfaction > 90%'] } },
-    { title: 'Partenariats', subtitle: 'Ecosystem Manager', icon: Handshake, content: { partners: ['Orange Money', 'Wave', 'Incubateur Local'] } },
-    { title: 'Coûts & risques', subtitle: 'Cost & Risk AI', icon: Shield, content: { capex: '53M FCFA', opex: '31M FCFA', scenarios: { pessimistic: '51M', realistic: '33M', optimistic: '13M' } } }
+    { 
+      title: 'Étude de marché', 
+      subtitle: 'Customer Intelligence', 
+      icon: TrendingUp, 
+      content: { 
+        size: '850M FCFA', 
+        growth: '28%', 
+        competitors: ['Concurrent A', 'Concurrent B'], 
+        opportunities: ['Digitalisation', 'Mobile Money', 'Marché inexploité'] 
+      } 
+    },
+    { 
+      title: 'Proposition de valeur', 
+      subtitle: 'Value Generator AI', 
+      icon: Target, 
+      content: { 
+        uniqueValue: `Simplifiez la gestion de ${formData.sector || 'votre secteur'} avec ${companyName}`, 
+        benefits: ['Gain de temps', 'Réduction des coûts', 'Meilleure visibilité'] 
+      } 
+    },
+    { 
+      title: 'Go-to-market', 
+      subtitle: 'Go-To-Market AI', 
+      icon: Rocket, 
+      content: { 
+        channels: ['Social Media', 'Partenaires locaux', 'Mobile Money'], 
+        budget: '40M FCFA', 
+        timeline: '3 mois' 
+      } 
+    },
+    { 
+      title: 'Modèle de revenus', 
+      subtitle: 'Revenue Intelligence', 
+      icon: DollarSign, 
+      content: { 
+        pricing: '49 500 FCFA/mois', 
+        arr: '250M FCFA', 
+        mrr: '25M FCFA' 
+      } 
+    },
+    { 
+      title: 'Organisation & RH', 
+      subtitle: 'Resource Optimizer', 
+      icon: Users, 
+      content: { 
+        structure: ['Direction', 'Commercial', 'Tech', 'Support'], 
+        payroll: '80M FCFA/an' 
+      } 
+    },
+    { 
+      title: 'Process & opérations', 
+      subtitle: 'Operations AI', 
+      icon: Settings, 
+      content: { 
+        workflows: ['Onboarding', 'Support', 'Facturation'], 
+        kpis: ['SLA < 2h', 'Satisfaction > 90%'] 
+      } 
+    },
+    { 
+      title: 'Partenariats', 
+      subtitle: 'Ecosystem Manager', 
+      icon: Handshake, 
+      content: { 
+        partners: ['Orange Money', 'Wave', 'Incubateur Local'] 
+      } 
+    },
+    { 
+      title: 'Coûts & risques', 
+      subtitle: 'Cost & Risk AI', 
+      icon: Shield, 
+      content: { 
+        capex: '53M FCFA', 
+        opex: '31M FCFA', 
+        scenarios: { pessimistic: '51M', realistic: '33M', optimistic: '13M' } 
+      } 
+    }
   ];
 
   const handleFinancialReports = () => {
@@ -40,7 +108,8 @@ export default function GeneratedBusinessPlan() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-            <div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
+      {/* Boutons flottants */}
+      <div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
         <button onClick={handleBack} className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><ArrowLeft size={18} /> Retour</button>
         <button onClick={handleFinancialReports} className="bg-secondary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><LineChart size={18} /> Rapports financiers</button>
         <button onClick={handlePrint} className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><Download size={18} /> PDF</button>
@@ -57,34 +126,86 @@ export default function GeneratedBusinessPlan() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {modules.map((mod, idx) => (
                 <div key={idx} className="border rounded-lg p-4 hover:shadow-md transition">
-                  <div className="flex items-center gap-2 mb-3"><mod.icon className="text-primary" size={20} /><h3 className="font-bold text-primary">{mod.title}</h3><span className="text-xs text-gray-400">{mod.subtitle}</span></div>
-                  {mod.title === 'Étude de marché' && (<><p className="text-sm">📊 Taille: {mod.content.size}</p><p className="text-sm">📈 Croissance: {mod.content.growth}</p><p className="text-sm">🎯 Opportunités: {mod.content.opportunities.join(', ')}</p></>)}
-                  {mod.title === 'Proposition de valeur' && (<><p className="text-sm font-medium text-gray-700">{mod.content.uniqueValue}</p><ul className="list-disc list-inside text-sm mt-2">{mod.content.benefits.map((b: string, i: number) => <li key={i}>{b}</li>)}</ul></>)}
-                  {mod.title === 'Go-to-market' && (<><p className="text-sm">📢 Canaux: {mod.content.channels.join(', ')}</p><p className="text-sm">💰 Budget: {mod.content.budget}</p><p className="text-sm">⏱️ Timeline: {mod.content.timeline}</p></>)}
-                  {mod.title === 'Modèle de revenus' && (<><p className="text-sm">💵 Pricing: {mod.content.pricing}</p><p className="text-sm">📊 ARR: {mod.content.arr} | MRR: {mod.content.mrr}</p></>)}
-                  {mod.title === 'Organisation & RH' && (<><p className="text-sm">🏢 Structure: {mod.content.structure.join(' → ')}</p><p className="text-sm">💰 Masse salariale: {mod.content.payroll}</p></>)}
-                  {mod.title === 'Process & opérations' && (<><p className="text-sm">⚙️ Workflows: {mod.content.workflows.join(', ')}</p><p className="text-sm">📊 KPIs: {mod.content.kpis.join(', ')}</p></>)}
-                  {mod.title === 'Partenariats' && (<><p className="text-sm">🤝 Partenaires: {mod.content.partners.join(', ')}</p></>)}
-                  {mod.title === 'Coûts & risques' && (<><p className="text-sm">🏗️ CAPEX: {mod.content.capex} | OPEX: {mod.content.opex}</p><div className="flex gap-2 mt-2"><span className="text-xs bg-red-100 px-2 py-1 rounded">Pessimiste: {mod.content.scenarios.pessimistic}M</span><span className="text-xs bg-yellow-100 px-2 py-1 rounded">Réaliste: {mod.content.scenarios.realistic}M</span><span className="text-xs bg-green-100 px-2 py-1 rounded">Optimiste: {mod.content.scenarios.optimistic}M</span></div></>)}
+                  <div className="flex items-center gap-2 mb-3">
+                    <mod.icon className="text-primary" size={20} />
+                    <h3 className="font-bold text-primary">{mod.title}</h3>
+                    <span className="text-xs text-gray-400">{mod.subtitle}</span>
+                  </div>
+                  
+                  {mod.title === 'Étude de marché' && (
+                    <>
+                      <p className="text-sm">📊 Taille: {mod.content?.size || 'N/A'}</p>
+                      <p className="text-sm">📈 Croissance: {mod.content?.growth || 'N/A'}</p>
+                      <p className="text-sm">🎯 Opportunités: {mod.content?.opportunities?.join(', ') || 'À définir'}</p>
+                    </>
+                  )}
+                  
+                  {mod.title === 'Proposition de valeur' && (
+                    <>
+                      <p className="text-sm font-medium text-gray-700">{mod.content?.uniqueValue || 'Valeur unique à définir'}</p>
+                      <ul className="list-disc list-inside text-sm mt-2">
+                        {mod.content?.benefits?.map((b: string, i: number) => <li key={i}>{b}</li>)}
+                      </ul>
+                    </>
+                  )}
+                  
+                  {mod.title === 'Go-to-market' && (
+                    <>
+                      <p className="text-sm">📢 Canaux: {mod.content?.channels?.join(', ') || 'N/A'}</p>
+                      <p className="text-sm">💰 Budget: {mod.content?.budget || 'N/A'}</p>
+                      <p className="text-sm">⏱️ Timeline: {mod.content?.timeline || 'N/A'}</p>
+                    </>
+                  )}
+                  
+                  {mod.title === 'Modèle de revenus' && (
+                    <>
+                      <p className="text-sm">💵 Pricing: {mod.content?.pricing || 'N/A'}</p>
+                      <p className="text-sm">📊 ARR: {mod.content?.arr || 'N/A'} | MRR: {mod.content?.mrr || 'N/A'}</p>
+                    </>
+                  )}
+                  
+                  {mod.title === 'Organisation & RH' && (
+                    <>
+                      <p className="text-sm">🏢 Structure: {mod.content?.structure?.join(' → ') || 'N/A'}</p>
+                      <p className="text-sm">💰 Masse salariale: {mod.content?.payroll || 'N/A'}</p>
+                    </>
+                  )}
+                  
+                  {mod.title === 'Process & opérations' && (
+                    <>
+                      <p className="text-sm">⚙️ Workflows: {mod.content?.workflows?.join(', ') || 'N/A'}</p>
+                      <p className="text-sm">📊 KPIs: {mod.content?.kpis?.join(', ') || 'N/A'}</p>
+                    </>
+                  )}
+                  
+                  {mod.title === 'Partenariats' && (
+                    <p className="text-sm">🤝 Partenaires: {mod.content?.partners?.join(', ') || 'N/A'}</p>
+                  )}
+                  
+                  {mod.title === 'Coûts & risques' && (
+                    <>
+                      <p className="text-sm">🏗️ CAPEX: {mod.content?.capex || 'N/A'} | OPEX: {mod.content?.opex || 'N/A'}</p>
+                      <div className="flex gap-2 mt-2">
+                        <span className="text-xs bg-red-100 px-2 py-1 rounded">Pessimiste: {mod.content?.scenarios?.pessimistic || 'N/A'}M</span>
+                        <span className="text-xs bg-yellow-100 px-2 py-1 rounded">Réaliste: {mod.content?.scenarios?.realistic || 'N/A'}M</span>
+                        <span className="text-xs bg-green-100 px-2 py-1 rounded">Optimiste: {mod.content?.scenarios?.optimistic || 'N/A'}M</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               ))}
             </div>
-            <div className="mt-8 text-center"><button onClick={handleFinancialReports} className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold hover:scale-105 transition">📊 Voir les rapports financiers détaillés <LineChart size={18} /></button></div>
+            <div className="mt-8 text-center">
+              <button onClick={handleFinancialReports} className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg font-semibold hover:scale-105 transition">
+                📊 Voir les rapports financiers détaillés <LineChart size={18} />
+              </button>
+            </div>
           </div>
-          <div className="bg-gray-50 p-3 text-center text-xs text-gray-400">Prévisions en FCFA - Adapté aux marchés africains - Intégrations Mobile Money</div>
+          <div className="bg-gray-50 p-3 text-center text-xs text-gray-400">
+            Prévisions en FCFA - Adapté aux marchés africains - Intégrations Mobile Money
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-// Ajouter les boutons d'export multiples dans la barre d'outils
-// Remplacer les boutons existants par :
-
-      <div className="fixed bottom-4 right-4 z-50 flex gap-2 print:hidden">
-        <button onClick={handleBack} className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><ArrowLeft size={18} /> Retour</button>
-        <button onClick={handleFinancialReports} className="bg-secondary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><LineChart size={18} /> Rapports financiers</button>
-        <button onClick={handlePrint} className="bg-primary text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><Download size={18} /> PDF</button>
-        <button onClick={handlePrint} className="bg-gray-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2"><Printer size={18} /> Imprimer</button>
-      </div>
-
